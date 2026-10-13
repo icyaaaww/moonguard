@@ -1,0 +1,8 @@
+import {
+  "moonguard/moonguard" @guard,
+  "moonbitlang/core/json",
+}
+
+options(
+  link: { "js": { "format": "esm", "exports": [ "dispatch" ] } },
+)

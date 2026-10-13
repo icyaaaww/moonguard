@@ -1,0 +1,5 @@
+import {
+  "moonguard/moonguard" @guard,
+}
+
+pkgtype(kind: "executable")

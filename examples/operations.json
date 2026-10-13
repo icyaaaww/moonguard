@@ -1,0 +1,10 @@
+{
+  "title": "创建知识库入口",
+  "operations": [
+    {
+      "kind": "create",
+      "path": "overview.md",
+      "content": "# 项目说明\n\n这份文档由外部操作计划创建，执行前请检查预演。\n"
+    }
+  ]
+}

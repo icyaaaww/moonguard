@@ -1,0 +1,16 @@
+{
+  "name": "moonguard-local",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MoonGuard local host and demonstration UI; decisions are compiled from MoonBit.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node host/server.mjs",
+    "test": "node --test host/tests/*.test.mjs",
+    "core:test": "moon test --target js",
+    "build": "moon run scripts/build.mbtx",
+    "cli": "node host/cli.mjs"
+  },
+  "license": "Apache-2.0"
+}

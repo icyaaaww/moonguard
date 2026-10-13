@@ -1,0 +1,41 @@
+name: MoonGuard checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core-and-host:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install official MoonBit toolchain
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - run: moon version --all
+      - run: moon update
+      - run: moon check --target all
+      - run: moon test --target js
+      - run: moon test --target wasm-gc
+      - run: moon info
+      - run: moon fmt
+      - name: Verify generated interfaces and formatting
+        run: git diff --exit-code -- '*.mbt' '*.mbti' 'moon.mod' '**/moon.pkg'
+      - name: Test bundled core with host
+        run: npm test
+      - run: npm run build
+      - name: Test freshly compiled core with host
+        run: npm test
+  windows-host:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm test

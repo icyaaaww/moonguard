@@ -1,0 +1,14 @@
+///|
+import {
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/shell",
+}
+
+///|
+async fn main {
+  @shell.Cmd("moon", ["build", "--target", "js", "--release"]).run()
+  let compiled = @fs.read_file("_build/js/release/build/bridge/bridge.js")
+  @fs.write_file("web/core.mjs", compiled)
+  println("MoonGuard: rebuilt web/core.mjs from MoonBit sources")
+}

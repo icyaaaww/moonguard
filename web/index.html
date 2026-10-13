@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="moonguard-token" content="__SESSION_TOKEN__">
+  <meta name="theme-color" content="#172a24">
+  <title>MoonGuard 月盾 · 先看见，再改变</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="MoonGuard 首页"><span class="brand-mark">M<span>↶</span></span><span>MoonGuard<small>月盾 · 文件变更工作台</small></span></a>
+    <div class="side-label">WORKSPACE</div>
+    <nav aria-label="工作台导航">
+      <button class="nav-item active" data-view="workspace"><span>⌘</span> 变更工作台 <span class="nav-index">01</span></button>
+      <button class="nav-item" data-view="history"><span>↶</span> 恢复记录 <span class="nav-index" id="history-count">0</span></button>
+      <button class="nav-item" id="guide"><span>?</span> 演示指南</button>
+    </nav>
+    <div class="workspace-box"><span class="status-dot"></span><strong id="workspace-name">连接本地工作区</strong><p id="workspace-info">正在读取文件…</p></div>
+    <div class="side-bottom"><span class="version">EARLY PREVIEW / 0.1</span><p>每一步变化，都有来路。</p><span class="engine-label">MoonBit core · Local execution</span></div>
+  </aside>
+  <main>
+    <header class="topbar"><div><span class="muted">工作空间</span><span class="slash">/</span><strong id="breadcrumb">变更工作台</strong></div><div class="top-actions"><span class="local-badge"><i></i> 本地运行</span><button class="quiet" id="refresh">刷新文件</button></div></header>
+    <section class="page" id="workspace-view">
+      <div class="intro"><div><div class="eyebrow">SEE THE CHANGE. KEEP THE CONTROL.</div><h1>先看见，<em>再改变。</em></h1><p>把文件操作变成一份可检查的计划。执行前预演，执行后可恢复。</p></div><div class="intro-note"><span>01 — 03</span><p>预演 / 执行 / 恢复</p><div class="mini-orbit"><i></i><i></i><i></i></div></div></div>
+      <div class="journey" aria-label="操作流程"><div class="step current" id="step-preview"><b>01</b><span>预演变更<small>先确认影响范围</small></span></div><span class="journey-line"></span><div class="step" id="step-apply"><b>02</b><span>检查并执行<small>验证文件没有变化</small></span></div><span class="journey-line"></span><div class="step" id="step-restore"><b>03</b><span>随时检查恢复<small>保护后续人工修改</small></span></div></div>
+      <section class="task-bar"><div class="task-icon">↳</div><div class="task-copy"><span class="eyebrow">本次任务</span><h2 id="task-title">按主题归档文档，并更新本地链接</h2><p id="planner-caption">内置规则示例 · 按文档 category 分类 · 无需模型密钥</p></div><div class="task-actions"><button class="secondary" id="import">导入操作 JSON</button><button class="primary" id="preview">生成预演 <span>→</span></button></div></section>
+      <div class="message" id="message" role="status" aria-live="polite" hidden></div>
+      <div class="workspace-grid">
+        <section class="file-panel"><div class="panel-title"><h2>文件视图</h2><span id="file-count" class="count">—</span></div><div class="file-tabs" role="group" aria-label="文件视图"><button id="tab-current" class="selected">当前文件</button><button id="tab-after">预演之后</button></div><div class="file-tree" id="file-tree"></div><div class="file-footer"><span class="status-dot"></span><span id="tree-note">正在读取工作区</span></div></section>
+        <section class="diff-panel"><div class="panel-title"><div class="diff-title"><span class="file-symbol">≡</span><h2 id="selected-file">README.md</h2></div><span id="diff-badge" class="tag">当前内容</span></div><div class="diff-head"><span>执行前 <small>BEFORE</small></span><span>预演结果 <small>AFTER</small></span></div><div id="diff" class="diff-body"></div><div class="diff-footer"><span id="diff-note">选择文件，查看内容与计划中的变化。</span><span>UTF-8</span></div></section>
+        <aside class="review-panel"><div class="panel-title"><h2>计划检查</h2><span class="small-mono">REVIEW</span></div><div class="review-content"><div class="review-state" id="review-state"><span class="review-symbol">◌</span><h3>等待预演</h3><p>先生成计划，再检查每一处变化。</p></div><dl class="metrics"><div><dt>文件移动</dt><dd id="metric-move">—</dd></div><div><dt>内容修改</dt><dd id="metric-write">—</dd></div><div><dt>新增 / 回收</dt><dd id="metric-other">—</dd></div></dl><div class="checks" id="checks"><p><span>○</span> 工作目录边界</p><p><span>○</span> 路径与覆盖冲突</p><p><span>○</span> 执行前内容校验</p></div><button class="primary full" id="apply" disabled>确认并执行 <span>→</span></button><button class="secondary full" id="restore" disabled>↶ 恢复上一次操作</button><p class="review-footnote" id="review-footnote">预演不会修改你的文件。</p></div></aside>
+      </div>
+      <section class="demo-lab" id="demo-lab"><div><span class="lab-label">试一试边界</span><p>亲手制造一次冲突，看看月盾如何处理。</p></div><div class="lab-actions"><button id="simulate">模拟用户修改</button><button id="fault" disabled>在第 2 步后中断</button><button id="reset">新建示例工作区 ↗</button></div></section>
+      <footer class="page-footer"><span id="status-line">本地文件 · 本地预演 · 本地恢复</span><button id="export" disabled>导出计划 JSON ↓</button></footer>
+    </section>
+    <section class="page" id="history-view" hidden><div class="eyebrow">EVERY CHANGE HAS A HISTORY.</div><h1>变化有迹，<em>恢复有据。</em></h1><p class="history-intro">每次执行前保存原始内容。恢复前，重新检查文件是否又被修改。</p><div id="history-list"></div></section>
+  </main>
+  <dialog id="import-dialog"><div class="dialog-head"><h2>导入文件操作计划</h2><button class="close-dialog" aria-label="关闭">×</button></div><p>粘贴由 AI 或其他工具生成的操作 JSON。月盾会独立验证路径、冲突和内容。</p><label for="import-json">操作列表</label><textarea id="import-json" spellcheck="false">{
+  "title": "新增项目说明",
+  "operations": [
+    { "kind": "create", "path": "overview.md", "to": null, "content": "# 项目说明\n" }
+  ]
+}</textarea><p class="dialog-note">支持 create、write、move、trash。仅处理工作区内受支持的文本文件。</p><div class="dialog-error" id="import-error" role="alert"></div><button class="primary" id="import-submit">验证并预演 →</button></dialog>
+  <dialog id="guide-dialog"><div class="dialog-head"><h2>三分钟，体验一次可恢复的改变。</h2><button class="close-dialog" aria-label="关闭">×</button></div><ol class="guide-steps"><li><strong>看见变化</strong><p>点击「生成预演」，选择 README.md，观察文档链接如何随归档更新。</p></li><li><strong>制造冲突</strong><p>点击「模拟用户修改」，再执行计划。系统会指出过期文件，并保留人工修改。</p></li><li><strong>执行与恢复</strong><p>重新预演后执行，再点击恢复。也可以在新示例中测试第 2 步中断后的恢复。</p></li></ol><p class="dialog-note">示例模式会真实操作隔离目录中的文件。分类由确定性规则完成，当前没有调用大模型。</p></dialog>
+  <noscript>MoonGuard 需要 JavaScript 来运行 MoonBit 编译后的预演核心。</noscript>
+</body>
+</html>
