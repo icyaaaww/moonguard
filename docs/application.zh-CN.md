@@ -15,7 +15,7 @@ MoonGuard（月盾）面向 AI Agent 操作本地文件时“修改前难以判�
 
 项目面向 MoonBit Agent 工具作者、开发者工具维护者，以及使用 AI 整理文档和项目资料的个人与团队，提供独立的 MoonBit 核心库、JSON 交互协议、本地文件执行适配器、CLI 和浏览器工作台。首个应用场景是 Markdown 知识库整理：按主题归档文档、调整受支持的相对链接，并直观展示预演、过期计划拦截和中断恢复过程。
 
-目前已完成可运行的本地 MVP。内置归档规划器采用确定性规则，外部 AI 或其他工具可通过操作 JSON 接入；实际大模型调用、OpenSeek/MCP 适配和 Mooncakes 发布属于后续建设范围。
+目前已完成可运行的本地 MVP，并提供 MCP stdio 适配器：外部客户端可以读取指定文件、提交计划和查询状态，用户在月盾页面检查后执行或拒绝。已通过官方 MCP SDK 客户端的真实跨进程集成测试。内置归档规划器仍采用确定性规则；实际大模型会话、OpenSeek 客户端实测和 Mooncakes 发布属于后续建设范围。
 
 **核心功能范围**
 
@@ -29,8 +29,10 @@ MoonGuard（月盾）面向 AI Agent 操作本地文件时“修改前难以判�
 - 提供事务状态记录与 SHA-256 内容校验记录，便于检查执行结果和定位需要恢复的操作；
 - 提供 Markdown 知识库整理示例，支持按指定 category 归档根目录文档，并调整受支持的简单行内相对链接与片段标识；
 - 提供浏览器工作台、CLI、外部操作 JSON 导入与计划导出，以及模拟人工修改和执行中断的可重复演示；
-- 已提供 35 项 MoonBit 测试，分别在 JS 与 Wasm GC 后端通过；另提供 17 项本地文件与 HTTP 测试，覆盖内容恢复、并发冲突、链接限制和接口校验；
-- 提供 README、可执行 MoonBit 示例、架构与边界说明、验证记录、演示脚本及 GitHub Actions 配置；后续完成 Mooncakes 发布、外部工具适配和真实用户验证。
+- 提供基于官方 SDK 的 MCP stdio 适配器与独立客户端示例，支持提案与页面联动、用户拒绝、计划状态查询，并保持执行前快照复核；
+- 提供面向文档和知识库维护者的四项引导试用任务，支持匿名编号、同意提示、计时、操作事件、评分和 JSON 导出；本地汇总排除演练记录，并区分自报完成和操作证据；
+- 已提供 35 项 MoonBit 测试，分别在 JS 与 Wasm GC 后端通过；另提供 22 项本地文件、HTTP 与试用记录测试，以及 3 项 MCP 跨进程集成测试；
+- 提供 README、可执行 MoonBit 示例、架构与边界说明、验证记录、演示脚本、试用包及 GitHub Actions 配置；目前真实参与者为 0，后续将采集实际使用反馈并完成 Mooncakes 发布。
 
 **移植或参考说明**
 
@@ -39,7 +41,8 @@ MoonGuard（月盾）面向 AI Agent 操作本地文件时“修改前难以判�
 - 原项目许可证：不适用；
 - 本项目许可证：Apache License 2.0；
 - 语言与标准库参考：[MoonBit 官方文档](https://docs.moonbitlang.com/en/latest/)及 [MoonBit Core](https://github.com/moonbitlang/core)；
-- 生态调研参考：[OpenSeek](https://github.com/moonbitlang/openseek) 的 Agent 工具场景，以及 [workflow](https://github.com/moonbitlang/workflow) 的流程记录与恢复方向。相关项目用于场景和设计调研，不表示已经集成或移植其实现。
+- MCP 适配器依赖：[@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk) 与 [Zod](https://github.com/colinhacks/zod)，采用其原有 MIT 许可证，版本和依赖关系通过独立 lockfile 固定；
+- 生态调研参考：[OpenSeek](https://github.com/moonbitlang/openseek) 的 Agent 工具场景，以及 [workflow](https://github.com/moonbitlang/workflow) 的流程记录与恢复方向。已核对 OpenSeek 标准 MCP 配置结构并提供示例，尚未完成 OpenSeek 客户端实测；不表示移植其实现。
 
 本项目采用以下设计与范围约束：
 

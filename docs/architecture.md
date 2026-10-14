@@ -1,5 +1,25 @@
 # Architecture and boundaries
 
+## Version 0.2 additions
+
+The optional `integrations/mcp` stdio adapter uses the official SDK and a scoped host
+capability exposing snapshot/propose/status, without apply, restore or session token.
+The web host and MCP server run in one process and share the active plan. A user must
+inspect and act on the local review page; newer proposals supersede old IDs. Status is
+bounded to 32 in-memory proposals, while file recovery journals remain on disk.
+This is an interface boundary, not isolation from clients possessing other local
+filesystem, shell or browser tools. Client reads can expose text to their model provider.
+
+The UI polls only a revision number and refreshes state on changes. Its session token
+remains separate from MCP results. Reset expires proposals; restoration invalidates an
+outstanding preview. Stale application is still rejected by the same MoonBit checks.
+
+Study records are opt-in, page-memory only, and downloaded as allowlisted JSON. They
+contain anonymous codes, task timings, outcomes, ratings and event kinds; no workspace
+paths or contents. The local report excludes practice records, checks duplicate IDs
+and distinguishes evidence from self-report. Source declarations and JSON are not
+authenticated; real participant provenance must be documented outside this software.
+
 ## Components
 
 ```text

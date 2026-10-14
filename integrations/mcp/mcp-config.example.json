@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "moonguard": {
+      "command": "node",
+      "args": ["/ABSOLUTE/PATH/moonguard/integrations/mcp/server.mjs", "--port", "4318"]
+    }
+  }
+}

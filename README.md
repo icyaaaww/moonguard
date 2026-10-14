@@ -2,7 +2,7 @@
 
 **先看见，再改变。** 将 AI 提议的文件操作变成可预演、可检查、可恢复的计划。
 
-这是一个已经能操作真实本地文件的早期 MVP：MoonBit 负责计划与冲突判断，同一份编译产物同时运行在浏览器和本地执行器中。附带知识库归档演示、Web 工作台与 CLI。当前内置归档器使用确定性规则；尚未接入大模型、MCP 或 OpenSeek。
+这是一个已经能操作真实本地文件的早期 MVP：MoonBit 负责计划与冲突判断，同一份编译产物同时运行在浏览器和本地执行器中。附带知识库归档演示、Web 工作台与 CLI。0.2 新增可选 MCP stdio 适配器和匿名试用记录。内置归档器仍使用确定性规则；尚未运行实际大模型或 OpenSeek 会话。
 
 ## 一分钟启动
 
@@ -30,6 +30,25 @@ npm start
 - 恢复时保护后续人工改动；遇到冲突拒绝覆盖；中断后可重新加载日志恢复。
 - 外部工具通过 JSON 接入，无需依赖某个模型供应商。
 - 本机 HTTP 接口具有会话令牌、Origin 与 Host 校验。
+- MCP 外部客户端可读取指定文件、提交计划和查询状态；用户在本地页面检查、执行或拒绝，MCP 不提供执行工具。
+- 四项文档维护者试用任务，支持计时、评分、匿名记录导出与本地汇总；演练不计入真人数据。
+
+## 外部工具接入（0.2）
+
+```sh
+npm ci --prefix integrations/mcp --ignore-scripts
+node integrations/mcp/demo-client.mjs --port 4318
+```
+
+这是独立的官方 MCP SDK 客户端示例，会启动 stdio 服务器并提交归档提案。打开输出的 reviewUrl 查看变化，再由你执行或拒绝；终端会显示状态更新。普通 `npm start` 无需安装这个可选适配器。详见 [MCP 接入与 OpenSeek 配置说明](integrations/mcp/README.md)。
+
+MCP 客户端读取文件时，内容可能交给其模型服务商。示例配置只使用虚构文档；对真实资料应先选择经授权的副本。我们没有自动修改任何外部客户端的配置。
+
+## 邀请同学、同事试用
+
+运行 `npm start`，打开侧栏“试用记录”。按任务开始计时、操作、填写结果，最后导出 JSON；页面不自动上传或持久化记录。将参与者自愿提供的文件放入已忽略的 `private-study/`，用 `node host/study-report.mjs <文件...>` 生成汇总。
+
+完整的 [试用包与邀请文案](docs/user-study.zh-CN.md) 可直接用于组织首轮试用。当前 [真实用户验证状态](docs/user-validation-results.md) 为 **0 位参与者**；开发演练和协议测试不等于真人反馈。
 
 ## 使用真实工作区
 
@@ -106,6 +125,8 @@ npm test
 ## 项目资料
 
 - [项目申报书](docs/application.zh-CN.md)
+- [文档维护者试用包](docs/user-study.zh-CN.md)
+- [真实用户验证状态](docs/user-validation-results.md)
 - [参赛项目方案](docs/proposal.zh-CN.md)
 - [三分钟演示脚本](docs/demo-script.zh-CN.md)
 - [架构与适用边界](docs/architecture.md)

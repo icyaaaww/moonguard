@@ -31,6 +31,8 @@ jobs:
       - run: npm run build
       - name: Test freshly compiled core with host
         run: npm test
+      - run: npm ci --prefix integrations/mcp --ignore-scripts
+      - run: npm run test:mcp
   windows-host:
     runs-on: windows-latest
     steps:
@@ -39,3 +41,5 @@ jobs:
         with:
           node-version: '24'
       - run: npm test
+      - run: npm ci --prefix integrations/mcp --ignore-scripts
+      - run: npm run test:mcp

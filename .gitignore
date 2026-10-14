@@ -8,3 +8,5 @@ target
 .moonguard/
 node_modules/
 *.log
+private-study/
+moonguard-study-*.json

@@ -1,4 +1,5 @@
 import { core } from './core-client.mjs';
+import { initStudy } from './study.mjs';
 
 const $ = id => document.getElementById(id);
 const token = document.querySelector('meta[name="moonguard-token"]').content;
@@ -11,6 +12,7 @@ let imported = null;
 let lastIssues = [];
 let validationOk = false;
 let restored = false;
+const study = initStudy();
 const stateLabel = { committed: '已执行 · 可检查恢复', undone: '已恢复', prepared: '等待恢复', committing: '执行中断', undoing: '恢复中断', 'needs-recovery': '需要恢复' };
 
 async function api(endpoint, data) {
@@ -20,6 +22,7 @@ async function api(endpoint, data) {
     ...(data === undefined ? {} : { body: JSON.stringify(data) }),
   });
   const payload = await response.json();
+  if (data !== undefined) study.record(endpoint, response.ok, payload, Boolean(session?.demo));
   if (!response.ok) throw Object.assign(new Error(payload.error), payload);
   return payload;
 }
@@ -58,6 +61,8 @@ function renderButtons() {
   $('import').disabled = busy || Boolean(pending());
   $('export').disabled = !plan || busy;
   $('apply').textContent = busy ? '正在处理…' : '确认并执行 →';
+  $('decline').hidden = !plan || session?.planSource !== 'mcp';
+  $('decline').disabled = busy;
 }
 
 function renderTree() {
@@ -139,14 +144,15 @@ function render() {
   $('workspace-info').title = session.workspace;
   $('demo-lab').hidden = !session.demo;
   $('task-title').textContent = session.plan?.title ?? imported?.title ?? '按主题归档文档，并更新本地链接';
-  $('planner-caption').textContent = imported ? '外部操作 JSON · MoonBit 核心独立验证' : '内置规则示例 · 按文档 category 分类 · 无需模型密钥';
-  $('status-line').textContent = `${session.snapshot.files.length} 个文本文件 · ${session.demo ? '隔离示例目录' : '本地目录'} · 不上传文件内容`;
+  $('planner-caption').textContent = session.planSource === 'mcp' && session.plan ? 'MCP 外部工具提案 · 等待你检查并执行' : imported ? '外部操作 JSON · MoonBit 核心独立验证' : '内置规则示例 · 按文档 category 分类 · 无需模型密钥';
+  $('status-line').textContent = `${session.snapshot.files.length} 个文本文件 · ${session.demo ? '隔离示例目录' : '本地目录'} · ${session.externalClient ? 'MCP 客户端可读取文件内容' : '不上传文件内容'}`;
   renderTree(); renderDiff(); renderReview(); renderHistory(); renderButtons();
 }
 
 function switchView(view) {
   $('workspace-view').hidden = view !== 'workspace'; $('history-view').hidden = view !== 'history';
-  $('breadcrumb').textContent = view === 'workspace' ? '变更工作台' : '恢复记录';
+  $('study-view').hidden = view !== 'study';
+  $('breadcrumb').textContent = {workspace:'变更工作台',history:'恢复记录',study:'试用记录'}[view];
   document.querySelectorAll('[data-view]').forEach(button => button.classList.toggle('active', button.dataset.view === view));
 }
 
@@ -178,6 +184,10 @@ $('apply').addEventListener('click', () => action(async () => {
   message('变更已执行。原始内容已保存，内容校验记录已生成。');
 }));
 $('restore').addEventListener('click', () => { const target = latestRecoverable(); if (target) doRestore(target.id); });
+$('decline').addEventListener('click', () => action(async () => {
+  session = await api('decline', { planId: session.planId }); imported=null;validationOk=false;lastIssues=[];afterView=false;
+  message('已拒绝这份提案，文件没有改变。');
+}));
 $('simulate').addEventListener('click', () => action(async () => {
   session = await api('demo-edit', {}); selected = 'README.md'; afterView = false;
   message('已在 README.md 添加一段模拟人工编辑。尝试执行或恢复，验证系统是否保护这段内容。');
@@ -214,8 +224,28 @@ action(async () => {
   session = await api('session');
   if (session.plan) {
     const p = session.plan;
-    if (session.planSource === 'import') imported = { title: p.title, operations: p.operations };
+    if (['import','mcp'].includes(session.planSource)) imported = { title: p.title, operations: p.operations };
     validationOk = JSON.stringify(core('plan', { snapshot: p.baseline, operations: p.operations, title: p.title })) === JSON.stringify(p);
     if (!validationOk) throw new Error('浏览器与执行器预演不一致，已阻止执行');
   }
 });
+
+// Poll only a revision number. Fetch contents only when the shared session changes.
+let syncing = false;
+setInterval(async () => {
+  if (busy || syncing || document.hidden || !session) return;
+  syncing = true;
+  try {
+    const version = await api('revision');
+    if (version.busy || version.revision === session.revision || busy) return;
+    const next = await api('session');
+    if (busy) return;
+    session = next;
+    imported = session.plan && ['import','mcp'].includes(session.planSource) ? { title: session.plan.title, operations: session.plan.operations } : null;
+    validationOk = session.plan ? JSON.stringify(core('plan', { snapshot: session.plan.baseline, operations: session.plan.operations, title: session.plan.title })) === JSON.stringify(session.plan) : false;
+    lastIssues = []; afterView = false;
+    message(session.planSource === 'mcp' && session.plan ? '收到外部工具提案。请检查文件变化，再决定是否执行。' : '工作区状态已更新。');
+    render();
+  } catch { /* Retry on the next tick; never enable execution from a failed sync. */ }
+  finally { syncing = false; }
+}, 2000);

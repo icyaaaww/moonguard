@@ -1,5 +1,32 @@
 # Validation record
 
+## 0.2 additions — 2026-10-14
+
+Local Windows checks: 22 root Node tests and 3 real-process official MCP SDK integration
+tests pass. The protocol tests exercise initialize/listTools/callTool, read-only inventory,
+scoped file reads, proposals without writes, HTTP approval, restore status, decline,
+superseded IDs, stale checks and invalid input. These are protocol tests, not an actual
+OpenSeek or LLM session.
+
+The optional adapter pins `@modelcontextprotocol/sdk 1.32.1` and `zod 4.6.7`, with an
+independent npm lockfile. Clean install from the official npm registry succeeded.
+`npm audit --omit=dev --registry=https://registry.npmjs.org` reported 0 vulnerabilities
+on this date (a point-in-time dependency report, not a product security guarantee).
+
+The browser completed all four study tasks in **practice** mode and exported a JSON
+record. The local report correctly returned `participantRecords: 0, practiceExcluded: 1`.
+Task events were checked in order, with workspace resets breaking evidence chains.
+There are no actual participants or real-user ratings in this validation.
+
+The browser also declined a proposal from the separate SDK example client. The UI
+reported that files were unchanged, and the client observed `state: declined`.
+MoonBit checks, interface generation, formatting, build, and the 35-test suite on
+each of the JS and Wasm GC targets passed again for 0.2.
+
+The 0.1 baseline below remains the historical record; new CI runs test both platforms
+including the MCP adapter. User-study recruitment and OpenSeek client execution remain
+unperformed.
+
 Executed locally on Windows, 2026-10-13. These are measured results, not projected CI
 results. Node `v24.19.0`; moon `0.1.20261012 (748b63c 2026-10-12)`; compiler/core
 `v0.10.15+943464bfa`.
@@ -51,4 +78,5 @@ user files, real API keys or model-provider connections were involved.
   have not been tested. All-target type checking is not native runtime testing.
 - No performance benchmark, coverage percentage, real-user outcome or comparative
   competitor result is claimed.
-- Mooncakes publication and third-party integration remain pending.
+- Mooncakes publication and actual OpenSeek/LLM client sessions remain pending;
+  the optional official-SDK MCP adapter is covered by the 0.2 checks above.
