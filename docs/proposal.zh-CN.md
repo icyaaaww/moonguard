@@ -1,6 +1,6 @@
 # MoonGuard 月盾：让 AI 的文件操作可预演、可检查、可恢复
 
-版本：0.2.0 原型；2026 年 10 月 14 日。参赛者：icyaaaww；仓库：https://github.com/icyaaaww/moonguard 。正式 Mooncakes 包名待注册确认。提交用申报书见 [application.zh-CN.md](application.zh-CN.md)。
+版本：0.2.0 原型历史方案；2026 年 10 月 14 日。参赛者：icyaaaww；仓库：https://github.com/icyaaaww/moonguard 。2026 年 10 月 15 日补充：正式核心库已发布为 `icyaaaww/moonguard@0.1.0`，当前应用版本为 1.0.0。申报材料草稿见 [application.zh-CN.md](application.zh-CN.md)，材料准备不代表已经提交报名。
 
 ## 项目摘要
 
@@ -56,7 +56,7 @@ MoonBit 核心编译出的同一个 JS 模块同时用于浏览器与执行器�
 | 已实现 | 文档、示例、Apache-2.0、CI 配置 |
 | 已实现 | MCP stdio 适配器、独立官方 SDK 客户端示例、提案页面联动 |
 | 已实现 | 文档维护者试用任务、匿名导出、本地汇总及观察脚本 |
-| 本次交付 | 公开仓库与真实提交历史；注册包名、Mooncakes 发布仍待完成 |
+| 本次交付 | 公开仓库与真实提交历史；已发布核心库 icyaaaww/moonguard@0.1.0 并完成独立安装验证 |
 | 待完成 | 外部开发者使用反馈、真实知识库案例、完整 Markdown 支持 |
 | 后续扩展 | OpenSeek 客户端实测、实际模型规划、MoonBit 原生 I/O 宿主 |
 

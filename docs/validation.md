@@ -103,5 +103,5 @@ user files, real API keys or model-provider connections were involved.
   have not been tested. All-target type checking is not native runtime testing.
 - No performance benchmark, coverage percentage, real-user outcome or comparative
   competitor result is claimed.
-- Mooncakes publication and actual OpenSeek/LLM client sessions remain pending;
+- Mooncakes core `icyaaaww/moonguard@0.1.0` has been published and installed in a fresh consumer project; see `mooncakes-release.md`. Actual OpenSeek/LLM client sessions remain pending;
   the optional official-SDK MCP adapter is covered by the 0.2 checks above.

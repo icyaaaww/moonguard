@@ -37,4 +37,24 @@ API 示例见 `README.mbt.md`。外部消费测试应覆盖正常计划、过期
 
 ## 本次状态
 
-发布准备与独立解包验证已完成；实际发布和注册表安装验证尚待执行。
+发布已完成：[Mooncakes 包文档](https://mooncakes.io/docs/icyaaaww/moonguard)。
+`moon publish` 返回 `200 OK`，`moon view icyaaaww/moonguard` 返回 `0.1.0`、正确许可证与 GitHub 地址。
+注册表记录发布时间为 **2026-10-15 09:10:40 UTC / 北京时间 17:10:40**。
+源码提交：`56936ff5f099106e57e399985046f26a64fe829c`。
+
+预检返回 `202 Accepted` 且正文为 `Dry run completed successfully. No changes were made.`；当前工具对此成功预检仍返回非零退出码。本记录以正式发布响应和独立安装为完成依据。
+
+发布 ZIP 为 24,140 字节、22 个文件；从注册表安装后的全部 22 个文件已逐个比对 SHA-256，与发布包一致。
+ZIP SHA-256：`a77467c283ceac32da87430c5dd004178ce1bc27980ac6915b29ee740b97aa05`。
+
+| 检查 | 实际结果 |
+| --- | --- |
+| 发布包独立解包检查、示例运行 | 通过 |
+| 发布包核心测试 | JS 35/35、Wasm GC 35/35 |
+| 重新编译后的宿主 / MCP / DOM 集成 | 26/26、3/3、1/1 |
+| 全新消费项目 `moon add icyaaaww/moonguard` | 从注册表下载 0.1.0，无本地路径依赖 |
+| 消费项目 `moon check --target all` | 通过，有仅在测试中使用的辅助函数 unused_value 提示 |
+| 外部 API 测试：计划与恢复、过期快照、恢复冲突、路径越界 | JS 4/4、Wasm GC 4/4 |
+| 消费项目可执行示例 | 成功输出 ready 计划与前后快照 |
+
+以上证明包可安装和调用，不代表实际用户采用，也不代表比赛报名或最终验收已提交。

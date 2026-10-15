@@ -146,4 +146,12 @@ npm test
 - [架构与适用边界](docs/architecture.md)
 - [本地验证记录](docs/validation.md)
 
-Apache-2.0 许可。项目仓库为 [icyaaaww/moonguard](https://github.com/icyaaaww/moonguard)，参赛者为 icyaaaww。`moonguard/moonguard` 是暂定包名，尚未声明 Mooncakes 命名空间所有权或发布 Mooncakes。正式提交前需要确定已注册包名，并完成包发布及真实用户验证。
+Apache-2.0 许可。项目仓库为 [icyaaaww/moonguard](https://github.com/icyaaaww/moonguard)，参赛者为 icyaaaww。
+Mooncakes 核心库已发布为 [`icyaaaww/moonguard@0.1.0`](https://mooncakes.io/docs/icyaaaww/moonguard)，可在其他 MoonBit 项目中安装：
+
+```sh
+moon add icyaaaww/moonguard
+```
+
+API 导入示例见 `README.mbt.md`，[发布与独立安装验证记录](docs/mooncakes-release.md)提供实际检查结果。
+库版本 `0.1.0` 与应用版本 `1.0.0` 独立编号；当前发布工具要求包版本为 `0.x.y`。真实用户验证仍待开展。
