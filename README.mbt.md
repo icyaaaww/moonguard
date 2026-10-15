@@ -4,6 +4,29 @@ Preview, validate and recover bounded file-operation plans with a pure MoonBit c
 The core performs no I/O. Hosts supply accurate snapshots, check filesystem types,
 serialize writers, persist a journal before writing, and apply only validated changes.
 
+Core module: `icyaaaww/moonguard@0.1.0`. The local application remains version
+`1.0.0`; library and application versions are independent. The current publishing
+tool requires a `0.x.y` library version.
+
+## Install
+
+In a MoonBit project:
+
+```sh
+moon add icyaaaww/moonguard
+```
+
+Import the root package in `moon.pkg`:
+
+```moonbit nocheck
+///|
+import {
+  "icyaaaww/moonguard",
+}
+```
+
+The following API example is checked by the library tests:
+
 ```mbt check
 ///|
 test {
@@ -30,7 +53,23 @@ files survive. Use `recovery=true` only for an interrupted commit/restore, where
 paths may have either their before or after contents.
 
 `organize(snapshot)` is a deterministic Markdown demonstration planner. The local Node
-adapter and browser demo are documented in README.md. No LLM is bundled. This package
-is an early preview, not an operating-system sandbox or a general transaction engine.
+adapter and browser demo are available in the GitHub repository. No LLM is bundled.
+This package is not an operating-system sandbox or a general transaction engine.
 
-The namespace is a local placeholder pending registration and publication.
+## Package contents and verification
+
+The registry archive contains the reusable core, JSON bridge, tests, a runnable
+`cmd/main` example, architecture notes and Apache-2.0 license. The Node filesystem
+executor, browser UI and MCP adapter are separate hosts in the GitHub repository;
+installing the library does not install or run them.
+
+```sh
+moon check --target all
+moon test --target js
+moon test --target wasm-gc
+moon run cmd/main --target js
+```
+
+See `docs/architecture.md` for limits and the filesystem obligations of a host.
+Do not treat a ready plan as authorization to mutate files without rechecking the
+current snapshot and protecting against concurrent writers and unsafe file types.

@@ -9,9 +9,9 @@
 //   "moonbitlang/x@0.4.6",
 // }
 
-name = "moonguard/moonguard"
+name = "icyaaaww/moonguard"
 
-version = "1.0.0"
+version = "0.1.0"
 
 readme = "README.mbt.md"
 
@@ -19,7 +19,7 @@ repository = "https://github.com/icyaaaww/moonguard"
 
 license = "Apache-2.0"
 
-keywords = [ ]
+keywords = [ "file-operations", "preview", "recovery", "validation" ]
 
 preferred_target = "js"
 

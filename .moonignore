@@ -1,0 +1,15 @@
+# Explicit library archive; this overrides .gitignore during packaging.
+/*
+!/*.mbt
+!/*.mbti
+!/moon.mod
+!/moon.pkg
+!/README.mbt.md
+!/LICENSE
+!/bridge/
+!/bridge/**
+!/cmd/
+!/cmd/**
+!/docs/
+/docs/*
+!/docs/architecture.md
