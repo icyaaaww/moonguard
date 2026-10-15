@@ -33,6 +33,8 @@ jobs:
         run: npm test
       - run: npm ci --prefix integrations/mcp --ignore-scripts
       - run: npm run test:mcp
+      - run: npm ci --prefix integrations/ui --ignore-scripts
+      - run: npm run test:ui
   windows-host:
     runs-on: windows-latest
     steps:
@@ -43,3 +45,5 @@ jobs:
       - run: npm test
       - run: npm ci --prefix integrations/mcp --ignore-scripts
       - run: npm run test:mcp
+      - run: npm ci --prefix integrations/ui --ignore-scripts
+      - run: npm run test:ui

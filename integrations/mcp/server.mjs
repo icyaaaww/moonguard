@@ -16,7 +16,7 @@ export async function createMcp({ workspace, demoRoot, port = 0 } = {}) {
   const host = await makeServer({ workspace, demoRoot, externalClient: true });
   await new Promise((resolve, reject) => { host.once('error', reject); host.listen(port, '127.0.0.1', resolve); });
   const reviewUrl = `http://127.0.0.1:${host.address().port}`;
-  const server = new McpServer({ name: 'moonguard', version: '0.2.0' });
+  const server = new McpServer({ name: 'moonguard', version: '1.0.0' });
   const output = value => ({ content: [{ type: 'text', text: JSON.stringify(value) }] });
   const wrap = fn => async args => {
     try { return output(await fn(args)); }

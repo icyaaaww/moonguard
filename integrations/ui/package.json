@@ -1,0 +1,8 @@
+{
+  "name": "moonguard-ui-tests",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test workbench.test.mjs" },
+  "devDependencies": { "jsdom": "30.1.2" }
+}

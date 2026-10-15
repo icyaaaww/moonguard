@@ -1,9 +1,9 @@
 {
   "name": "moonguard-local",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "MoonGuard local host and demonstration UI; decisions are compiled from MoonBit.",
+  "description": "MoonGuard local file workspace: preview, validate, execute and recover with MoonBit.",
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node host/server.mjs",
@@ -13,7 +13,8 @@
     "cli": "node host/cli.mjs",
     "mcp": "node integrations/mcp/server.mjs",
     "test:mcp": "npm --prefix integrations/mcp test",
-    "study:report": "node host/study-report.mjs"
+    "study:report": "node host/study-report.mjs",
+    "test:ui": "npm --prefix integrations/ui test"
   },
   "license": "Apache-2.0"
 }

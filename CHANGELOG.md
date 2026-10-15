@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0 — 2026-10-15
+
+- Public local distribution with Windows and shell launchers, automatic ports and startup help.
+- Open a document directory from the workbench; switching invalidates old plans and preserves journals.
+- Compose file operations with forms and inspect excluded workspace items.
+- Keep MCP workspace scope fixed and block workspace switching until interrupted work is recovered.
+- Add user guide, release notes and issue reporting template; keep study participation optional.
+- Preserve original study record versions when importing historical records.
+- New UI has DOM integration coverage; native browser visual acceptance and real-user validation remain pending.
+
 ## 0.2.0 — 2026-10-14
 
 - Added optional official-SDK MCP stdio adapter and a separate runnable consumer.

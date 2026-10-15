@@ -18,7 +18,7 @@ export function initStudy() {
   }
   $('study-start').addEventListener('click',()=>{
     if(!/^P\d{2,4}$/.test($('study-code').value)||!$('study-consent').checked){$('study-error').textContent='请填写 P01 这类匿名编号，并勾选试用同意。';return;}
-    record={schema:1,product:'moonguard',version:'0.2.0',sessionId:crypto.randomUUID(),source:$('study-source').value,participantCode:$('study-code').value,consent:true,started:new Date().toISOString(),tasks:[],feedback:[]};
+    record={schema:1,product:'moonguard',version:'1.0.0',sessionId:crypto.randomUUID(),source:$('study-source').value,participantCode:$('study-code').value,consent:true,started:new Date().toISOString(),tasks:[],feedback:[]};
     $('study-error').textContent='已开始。刷新或关闭页面会丢失尚未导出的记录。';render();
   });
   $('study-save-task').addEventListener('click',()=>{

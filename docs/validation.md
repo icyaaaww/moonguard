@@ -1,5 +1,30 @@
 # Validation record
 
+## 1.0 public distribution — 2026-10-15
+
+Local Windows checks passed: 35 MoonBit tests on each of JS and Wasm GC, all-target
+checking, `moon info`, `moon fmt`, rebuild, 26 host tests and 3 MCP process tests.
+The new host cases exercise directory switching, invalid paths, invalidated old
+plan IDs, preserved journals, pending recovery, fixed MCP scope and launcher parsing.
+
+One additional jsdom integration test loads the real page and application module,
+opens a temporary directory through the form, composes all four operation types,
+previews, applies and restores through the HTTP server, and checks exact disk bytes.
+It also checks excluded files and served assets. jsdom is an optional test-only
+dependency with its own lockfile; normal use still requires no npm dependencies.
+Run `npm ci --prefix integrations/ui --ignore-scripts` then `npm run test:ui`.
+The test runtime uses Node 24 (jsdom itself needs a recent Node 22/24 patch version).
+
+Native browser visual acceptance of the new 1.0 screens was not completed: automatic
+approval review blocked the background browser launch command without a more specific
+reason. DOM testing does not verify layout, focus behavior or OS browser launch.
+macOS execution and real-user collection remain unverified. Existing 0.2 browser
+records below do not establish visual acceptance of the new screens.
+
+Release packages are made from the Git commit with `git archive`, excluding ignored
+workspaces, personal study records and node_modules, and have a SHA-256 checksum.
+The package includes the compiled core; Node.js 22+ is an external prerequisite.
+
 ## 0.2 additions — 2026-10-14
 
 Local Windows checks: 22 root Node tests and 3 real-process official MCP SDK integration

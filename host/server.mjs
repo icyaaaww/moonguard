@@ -10,6 +10,7 @@ const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const assets = new Map([['/', 'index.html'], ['/app.mjs', 'app.mjs'], ['/style.css', 'style.css'], ['/core.mjs', 'core.mjs'], ['/core-client.mjs', 'core-client.mjs']]);
 assets.set('/study.mjs', 'study.mjs');
 assets.set('/study-model.mjs', 'study-model.mjs');
+assets.set('/composer.mjs', 'composer.mjs');
 
 async function body(req) {
   if (!req.headers['content-type']?.startsWith('application/json')) throw new GuardError('需要 application/json');
@@ -19,7 +20,7 @@ async function body(req) {
 }
 
 export async function makeServer({ workspace = null, demoRoot = path.join(project, '.demo'), externalClient = false } = {}) {
-  const demo = !workspace;
+  let demo = !workspace;
   let root = workspace ? await workspaceRoot(workspace) : await createDemo(demoRoot);
   const token = randomBytes(24).toString('hex');
   let currentPlan = null;
@@ -61,7 +62,16 @@ export async function makeServer({ workspace = null, demoRoot = path.join(projec
         busy = true; ownsBusy = true;
         const input = await body(req);
         let result = null;
-        if (url.pathname === '/api/preview') {
+        if (url.pathname === '/api/workspace') {
+          if (externalClient) throw new GuardError('MCP 会话的工作区由启动配置指定，请重启客户端以切换');
+          if ((await history(root)).some(h => !['committed', 'undone'].includes(h.state))) throw new GuardError('请先恢复当前工作区的未完成事务');
+          if (typeof input.path !== 'string' || !path.isAbsolute(input.path)) throw new GuardError('请输入文件夹的完整绝对路径');
+          const nextRoot = await workspaceRoot(input.path);
+          await readWorkspace(nextRoot);
+          await history(nextRoot);
+          for (const proposal of proposals.values()) if (proposal.state === 'awaiting_review') proposal.state = 'superseded';
+          root = nextRoot; demo = false; currentPlan = null; planId = null; planSource = null;
+        } else if (url.pathname === '/api/preview') {
           await propose(input, input.operations == null ? 'organize' : 'import');
         } else if (url.pathname === '/api/apply') {
           if (!currentPlan || input.planId !== planId) throw new GuardError('预演编号已过期，请重新预演');
@@ -127,11 +137,6 @@ export async function makeServer({ workspace = null, demoRoot = path.join(projec
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const args = process.argv.slice(2);
-  const option = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : undefined; };
-  const server = await makeServer({ workspace: option('--workspace'), demoRoot: option('--demo-root') });
-  server.listen(Number(option('--port') ?? 4317), '127.0.0.1', () => {
-    console.log(`MoonGuard ready at http://127.0.0.1:${server.address().port}`);
-    console.log(option('--workspace') ? 'Local workspace mode.' : 'Isolated sample workspace. No API key required.');
-  });
+  const { launch } = await import('./launch.mjs');
+  await launch(process.argv.slice(2), makeServer);
 }

@@ -24,6 +24,8 @@ test('study validation rejects duplicated subjects/sessions, malformed timings a
 test('exports allowlist fields rather than retaining file contents or personal fields',()=>{
   const r=fixture();r.name='private';r.fileContents='private';r.tasks[0].events[0].path='private';
   assert.ok(!JSON.stringify(validateRecord(r)).includes('private'));
+  r.version='0.2.0';assert.equal(validateRecord(r).version,'0.2.0');
+  r.version='1.0.0';assert.equal(validateRecord(r).version,'1.0.0');
 });
 test('evidence must be in order and in the same demonstration workspace',()=>{
   const event=kind=>({kind,demo:true,offsetMs:0});

@@ -16,18 +16,19 @@
     <nav aria-label="工作台导航">
       <button class="nav-item active" data-view="workspace"><span>⌘</span> 变更工作台 <span class="nav-index">01</span></button>
       <button class="nav-item" data-view="history"><span>↶</span> 恢复记录 <span class="nav-index" id="history-count">0</span></button>
-      <button class="nav-item" id="guide"><span>?</span> 演示指南</button>
-      <button class="nav-item" data-view="study"><span>◎</span> 试用记录</button>
+      <button class="nav-item" id="guide"><span>?</span> 使用帮助</button>
+      <button class="nav-item" data-view="study"><span>◎</span> 参与试用（可选）</button>
     </nav>
     <div class="workspace-box"><span class="status-dot"></span><strong id="workspace-name">连接本地工作区</strong><p id="workspace-info">正在读取文件…</p></div>
-    <div class="side-bottom"><span class="version">EARLY PREVIEW / 0.2</span><p>每一步变化，都有来路。</p><span class="engine-label">MoonBit core · Local execution</span></div>
+    <div class="side-bottom"><span class="version">MOONGUARD / 1.0.0</span><p>每一步变化，都有来路。</p><span class="engine-label">MoonBit core · Local execution</span></div>
   </aside>
   <main>
-    <header class="topbar"><div><span class="muted">工作空间</span><span class="slash">/</span><strong id="breadcrumb">变更工作台</strong></div><div class="top-actions"><span class="local-badge"><i></i> 本地运行</span><button class="quiet" id="refresh">刷新文件</button></div></header>
+    <header class="topbar"><div><span class="muted">工作空间</span><span class="slash">/</span><strong id="breadcrumb">变更工作台</strong></div><div class="top-actions"><span class="local-badge"><i></i> 本地运行</span><button class="secondary" id="open-workspace">打开资料目录</button><button class="quiet" id="refresh">刷新文件</button></div></header>
     <section class="page" id="workspace-view">
       <div class="intro"><div><div class="eyebrow">SEE THE CHANGE. KEEP THE CONTROL.</div><h1>先看见，<em>再改变。</em></h1><p>把文件操作变成一份可检查的计划。执行前预演，执行后可恢复。</p></div><div class="intro-note"><span>01 — 03</span><p>预演 / 执行 / 恢复</p><div class="mini-orbit"><i></i><i></i><i></i></div></div></div>
       <div class="journey" aria-label="操作流程"><div class="step current" id="step-preview"><b>01</b><span>预演变更<small>先确认影响范围</small></span></div><span class="journey-line"></span><div class="step" id="step-apply"><b>02</b><span>检查并执行<small>验证文件没有变化</small></span></div><span class="journey-line"></span><div class="step" id="step-restore"><b>03</b><span>随时检查恢复<small>保护后续人工修改</small></span></div></div>
-      <section class="task-bar"><div class="task-icon">↳</div><div class="task-copy"><span class="eyebrow">本次任务</span><h2 id="task-title">按主题归档文档，并更新本地链接</h2><p id="planner-caption">内置规则示例 · 按文档 category 分类 · 无需模型密钥</p></div><div class="task-actions"><button class="secondary" id="import">导入操作 JSON</button><button class="primary" id="preview">生成预演 <span>→</span></button></div></section>
+      <section class="task-bar"><div class="task-icon">↳</div><div class="task-copy"><span class="eyebrow">本次任务</span><h2 id="task-title">按主题归档文档，并更新本地链接</h2><p id="planner-caption">内置规则示例 · 按文档 category 分类 · 无需模型密钥</p></div><div class="task-actions"><button class="secondary" id="compose">新建操作</button><button class="secondary" id="import">导入 JSON</button><button class="primary" id="preview">生成预演 <span>→</span></button><button class="quiet" id="organize">按主题归档</button></div></section>
+      <details class="scope-note"><summary>支持范围与未参与处理的项目 <span id="blocked-count"></span></summary><p>支持 UTF-8 的 .md、.txt、.json、.csv，最多 200 个文本文件。移动操作不会自动修复链接；“按主题归档”仅调整受支持的 Markdown 行内链接。隐藏项、二进制和链接文件不参与操作。</p><ul id="blocked-list"></ul></details>
       <div class="message" id="message" role="status" aria-live="polite" hidden></div>
       <button class="secondary" id="decline" hidden>拒绝这份外部提案</button>
       <div class="workspace-grid">
@@ -66,7 +67,9 @@
     { "kind": "create", "path": "overview.md", "to": null, "content": "# 项目说明\n" }
   ]
 }</textarea><p class="dialog-note">支持 create、write、move、trash。仅处理工作区内受支持的文本文件。</p><div class="dialog-error" id="import-error" role="alert"></div><button class="primary" id="import-submit">验证并预演 →</button></dialog>
-  <dialog id="guide-dialog"><div class="dialog-head"><h2>三分钟，体验一次可恢复的改变。</h2><button class="close-dialog" aria-label="关闭">×</button></div><ol class="guide-steps"><li><strong>看见变化</strong><p>点击「生成预演」，选择 README.md，观察文档链接如何随归档更新。</p></li><li><strong>制造冲突</strong><p>点击「模拟用户修改」，再执行计划。系统会指出过期文件，并保留人工修改。</p></li><li><strong>执行与恢复</strong><p>重新预演后执行，再点击恢复。也可以在新示例中测试第 2 步中断后的恢复。</p></li></ol><p class="dialog-note">示例模式会真实操作隔离目录中的文件。分类由确定性规则完成，当前没有调用大模型。</p></dialog>
+  <dialog id="workspace-dialog"><div class="dialog-head"><h2>打开本地资料目录</h2><button class="close-dialog" aria-label="关闭">×</button></div><p>粘贴文件夹的完整路径。首次使用建议选择资料副本；文件内容会显示在本地工作台。</p><label for="workspace-path">文件夹完整路径</label><input id="workspace-path" placeholder="例如 D:\Documents\知识库" autocomplete="off"><p class="dialog-note">可在文件管理器的地址栏复制路径。切换会清除当前未执行计划；恢复日志仍保存在各自目录。执行和恢复期间，请暂停其他应用对这个目录的写入。</p><p id="workspace-error" role="alert"></p><button class="primary" id="workspace-submit">打开并读取文件</button></dialog>
+  <dialog id="compose-dialog"><div class="dialog-head"><h2>创建文件操作计划</h2><button class="close-dialog" aria-label="关闭">×</button></div><p>把需要的操作加入列表，再统一预演。这里不会直接修改文件。</p><label for="operation-kind">操作类型</label><select id="operation-kind"><option value="move">移动 / 重命名</option><option value="create">新建文件</option><option value="write">修改内容</option><option value="trash">回收文件</option></select><label for="operation-path">工作区内的文件路径</label><input id="operation-path" list="workspace-files" placeholder="例如 notes.md" autocomplete="off"><datalist id="workspace-files"></datalist><div id="operation-to-field"><label for="operation-to">目标路径</label><input id="operation-to" placeholder="例如 archive/notes.md" autocomplete="off"></div><div id="operation-content-field" hidden><label for="operation-content">完整文件内容</label><textarea id="operation-content" spellcheck="false"></textarea><button class="quiet" id="operation-load">读取当前文件内容</button></div><p class="dialog-note">使用 / 分隔子目录。移动不自动修改文档链接；回收可从月盾恢复记录还原。</p><button class="secondary" id="operation-add">加入计划</button><ol id="operation-list"></ol><p id="operation-error" role="alert"></p><button class="primary" id="operation-preview" disabled>预演这份计划 →</button></dialog>
+  <dialog id="guide-dialog"><div class="dialog-head"><h2>从资料目录到可恢复的变更</h2><button class="close-dialog" aria-label="关闭">×</button></div><ol class="guide-steps"><li><strong>打开目录</strong><p>点击「打开资料目录」，粘贴完整文件夹路径。默认的示例可用于熟悉流程。</p></li><li><strong>创建计划</strong><p>点击「新建操作」移动、重命名、新建、修改或回收文件。也可导入外部工具生成的 JSON。</p></li><li><strong>检查后执行</strong><p>逐个查看文件变化，点击「确认并执行」。如果资料在预演后被修改，请重新预演。</p></li><li><strong>检查并恢复</strong><p>在「恢复记录」中选择操作。后续人工修改发生冲突时，月盾会停止覆盖。</p></li></ol><p class="dialog-note">“按主题归档”读取根目录 Markdown 中的 category: engineering / product / research，并调整受支持的简单相对链接。它是规则工具，无需模型密钥。更多说明见下载包 docs/user-guide.zh-CN.md。</p></dialog>
   <noscript>MoonGuard 需要 JavaScript 来运行 MoonBit 编译后的预演核心。</noscript>
 </body>
 </html>

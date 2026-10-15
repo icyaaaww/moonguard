@@ -1,5 +1,6 @@
 import { core } from './core-client.mjs';
 import { initStudy } from './study.mjs';
+import { initComposer } from './composer.mjs';
 
 const $ = id => document.getElementById(id);
 const token = document.querySelector('meta[name="moonguard-token"]').content;
@@ -13,6 +14,8 @@ let lastIssues = [];
 let validationOk = false;
 let restored = false;
 const study = initStudy();
+const composer = initComposer({ getFiles: () => session?.snapshot.files ?? [], submit: value => { imported = value; action(doPreview); } });
+let actionGeneration = 0;
 const stateLabel = { committed: '已执行 · 可检查恢复', undone: '已恢复', prepared: '等待恢复', committing: '执行中断', undoing: '恢复中断', 'needs-recovery': '需要恢复' };
 
 async function api(endpoint, data) {
@@ -35,6 +38,7 @@ function message(text, error = false, issues = []) {
 
 async function action(fn) {
   if (busy) return;
+  actionGeneration++;
   busy = true; renderButtons();
   try { await fn(); }
   catch (e) {
@@ -59,6 +63,10 @@ function renderButtons() {
   $('reset').disabled = busy;
   $('refresh').disabled = busy;
   $('import').disabled = busy || Boolean(pending());
+  $('compose').disabled = busy || !session || Boolean(pending());
+  $('organize').disabled = busy || !session || Boolean(pending());
+  $('open-workspace').disabled = busy || !session || Boolean(pending());
+  $('open-workspace').hidden = Boolean(session?.externalClient);
   $('export').disabled = !plan || busy;
   $('apply').textContent = busy ? '正在处理…' : '确认并执行 →';
   $('decline').hidden = !plan || session?.planSource !== 'mcp';
@@ -115,7 +123,7 @@ function renderReview() {
   if (interrupted) { title = '事务等待恢复'; detail = '原始内容已记录，点击恢复检查当前文件。'; icon = '↶'; mode = 'bad'; }
   else if (issues.length) { title = '发现冲突'; detail = '先检查冲突文件，再重新生成预演。'; icon = '!'; mode = 'bad'; }
   else if (p && p.changes.length && validationOk) { title = '计划可以执行'; detail = '浏览器和本地执行器的预演结果一致。'; icon = '✓'; mode = 'good'; }
-  else if (p && !p.changes.length) { title = '无需修改'; detail = '当前文件已满足此任务的归档规则。'; icon = '✓'; mode = 'good'; }
+  else if (p && !p.changes.length) { title = '无需修改'; detail = '这份计划没有产生文件变化。按主题归档仅处理受支持的 category 文档；也可新建自定义操作。'; icon = '✓'; mode = 'good'; }
   else if (restored || last?.state === 'undone') { title = '恢复完成'; detail = '受影响文件的路径与内容已校验。'; icon = '↶'; mode = 'good'; }
   else if (last?.state === 'committed') { title = '变更已执行'; detail = '原始内容已保存，可以检查恢复。'; icon = '✓'; mode = 'good'; }
   $('review-state').className = `review-state ${mode}`;
@@ -143,8 +151,10 @@ function render() {
   $('workspace-info').textContent = session.demo ? '隔离的示例文件，可自由体验预演、冲突与恢复。' : session.workspace;
   $('workspace-info').title = session.workspace;
   $('demo-lab').hidden = !session.demo;
+  $('blocked-count').textContent = `（${session.snapshot.blocked.length} 项未参与）`;
+  $('blocked-list').innerHTML = session.snapshot.blocked.slice(0, 100).map(name => `<li>${escape(name)}</li>`).join('') + (session.snapshot.blocked.length > 100 ? '<li>仅显示前 100 项</li>' : '');
   $('task-title').textContent = session.plan?.title ?? imported?.title ?? '按主题归档文档，并更新本地链接';
-  $('planner-caption').textContent = session.planSource === 'mcp' && session.plan ? 'MCP 外部工具提案 · 等待你检查并执行' : imported ? '外部操作 JSON · MoonBit 核心独立验证' : '内置规则示例 · 按文档 category 分类 · 无需模型密钥';
+  $('planner-caption').textContent = session.planSource === 'mcp' && session.plan ? 'MCP 外部工具提案 · 等待你检查并执行' : imported ? '自定义文件计划 · 请逐项检查路径和内容' : '按文档 category 分类 · 无需模型密钥';
   $('status-line').textContent = `${session.snapshot.files.length} 个文本文件 · ${session.demo ? '隔离示例目录' : '本地目录'} · ${session.externalClient ? 'MCP 客户端可读取文件内容' : '不上传文件内容'}`;
   renderTree(); renderDiff(); renderReview(); renderHistory(); renderButtons();
 }
@@ -178,8 +188,25 @@ function doRestore(id) {
 }
 
 $('preview').addEventListener('click', () => action(doPreview));
+$('organize').addEventListener('click', () => { imported = null; action(doPreview); });
+$('compose').addEventListener('click', () => composer.open(selected));
+$('open-workspace').addEventListener('click', () => { $('workspace-error').textContent = ''; $('workspace-dialog').showModal(); });
+$('workspace-submit').addEventListener('click', async () => {
+  if (busy) return;
+  $('workspace-submit').disabled = true;
+  await action(async () => {
+    try {
+      session = await api('workspace', { path: $('workspace-path').value.trim().replace(/^"(.*)"$/, '$1') });
+    } catch (error) { $('workspace-error').textContent = error.message; throw error; }
+    imported = null; validationOk = false; lastIssues = []; afterView = false; restored = false;
+    composer.reset(); $('workspace-dialog').close(); switchView('workspace');
+    message('资料目录已打开。点击“新建操作”安排文件变更，检查预演后再执行。');
+  });
+  $('workspace-submit').disabled = false;
+});
 $('apply').addEventListener('click', () => action(async () => {
   session = await api('apply', { planId: session.planId });
+  composer.reset();
   afterView = false; lastIssues = []; validationOk = false;
   message('变更已执行。原始内容已保存，内容校验记录已生成。');
 }));
@@ -197,6 +224,7 @@ $('fault').addEventListener('click', () => action(async () => {
 }));
 $('reset').addEventListener('click', () => action(async () => {
   session = await api('demo-reset', {}); imported = null; lastIssues = []; validationOk = false; restored = false; afterView = false; selected = 'README.md';
+  composer.reset();
   message('已创建新的示例工作区。上一份示例文件仍保留在本地。');
 }));
 $('refresh').addEventListener('click', () => action(async () => { session = await api('session'); message('已刷新当前文件。已有计划在执行时仍会重新校验。'); }));
@@ -236,10 +264,11 @@ setInterval(async () => {
   if (busy || syncing || document.hidden || !session) return;
   syncing = true;
   try {
+    const generation = actionGeneration;
     const version = await api('revision');
     if (version.busy || version.revision === session.revision || busy) return;
     const next = await api('session');
-    if (busy) return;
+    if (busy || generation !== actionGeneration) return;
     session = next;
     imported = session.plan && ['import','mcp'].includes(session.planSource) ? { title: session.plan.title, operations: session.plan.operations } : null;
     validationOk = session.plan ? JSON.stringify(core('plan', { snapshot: session.plan.baseline, operations: session.plan.operations, title: session.plan.title })) === JSON.stringify(session.plan) : false;
