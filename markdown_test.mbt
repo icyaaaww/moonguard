@@ -112,3 +112,50 @@ test "closed quoted and BOM frontmatter is recognized without altering bytes" {
     )
   }
 }
+
+///|
+test "long fences do not close on shorter runs or trailing text" {
+  let moved = { "A.md": "docs/a.md" }
+  for marker in ["`", "~"] {
+    let short = marker + marker + marker
+    let long = short + marker
+    let code = long +
+      "md\r\n[a](A.md)\r\n" +
+      short +
+      "\r\n[a](A.md)\r\n" +
+      long +
+      " trailing\r\n[a](A.md)\r\n" +
+      long +
+      "  \r\n"
+    assert_eq(
+      @moonguard.rewrite_links(
+        code + "[a](A.md)",
+        "README.md",
+        "README.md",
+        moved,
+      ),
+      code + "[a](docs/a.md)",
+    )
+  }
+}
+
+///|
+test "unclosed mixed and indented code blocks preserve examples" {
+  let moved = { "A.md": "docs/a.md" }
+  for
+    content in [
+      "```md\n[a](A.md)\n~~~\n[a](A.md)", "   ~~~~md\n[a](A.md)\n   ~~~\n[a](A.md)",
+      "    [a](A.md)\n\t[a](A.md)",
+    ] {
+    assert_eq(
+      @moonguard.rewrite_links(content, "README.md", "README.md", moved),
+      content,
+    )
+  }
+  assert_eq(
+    @moonguard.rewrite_links(
+      "   ```md\n[a](A.md)\n  ````\n[a](A.md)", "README.md", "README.md", moved,
+    ),
+    "   ```md\n[a](A.md)\n  ````\n[a](docs/a.md)",
+  )
+}

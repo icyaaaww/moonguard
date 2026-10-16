@@ -752,17 +752,18 @@ const _M0FP28icyaaaww9moonguard13resolve__linkN7_2abindS2882 = "\\";
 const _M0FP28icyaaaww9moonguard13resolve__linkN7_2abindS2883 = "/";
 const _M0FP28icyaaaww9moonguard13resolve__linkN7_2abindS2884 = "/";
 const _M0FP28icyaaaww9moonguard13resolve__linkN7_2abindS2885 = "/";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN6constrS2916 = 3;
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2917 = "\n";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2918 = "```";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2919 = "~~~";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2920 = " ";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2921 = "\t";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2922 = "(";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2923 = "#";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2916 = "\n";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2917 = "```";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2918 = "~~~";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2919 = "`";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2920 = "\t";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2921 = " ";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2922 = "\t";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2923 = "(";
 const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2924 = "#";
 const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2925 = "#";
-const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2926 = "\n";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2926 = "#";
+const _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2927 = "\n";
 const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2856 = "﻿";
 const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2857 = "---\n";
 const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2858 = "---\r\n";
@@ -772,11 +773,11 @@ const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2861 = "\"";
 const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2862 = "\"";
 const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2863 = "'";
 const _M0FP28icyaaaww9moonguard8categoryN7_2abindS2864 = "'";
-const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2961 = "/";
-const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2962 = ".md";
-const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2963 = " ";
-const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2964 = "-";
-const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2965 = ".md";
+const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2968 = "/";
+const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2969 = ".md";
+const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2970 = " ";
+const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2971 = "-";
+const _M0FP28icyaaaww9moonguard8organizeN7_2abindS2972 = ".md";
 const _M0FPC17prelude4null = _M0FPB4null;
 const _M0FPC28internal7strconv17parse__scientificN8exp__numS1660 = 0n;
 const _M0FPC28internal7strconv17check__underscoreN25_2atransition__table__222S1763 = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 0, 1, 2, 5];
@@ -7551,23 +7552,23 @@ function _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard
     return _M0FPC14json13decode__errorGRPB5ArrayGRP28icyaaaww9moonguard9OperationEE(path, "Array::from_json: expected array");
   }
 }
-function _M0IP28icyaaaww9moonguard5IssuePB6ToJson8to__json(_x_303) {
+function _M0IP28icyaaaww9moonguard5IssuePB6ToJson8to__json(_x_307) {
   const _bind = [];
   const $36$map = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind, 0, 0), undefined);
-  const _p = _x_303.code;
+  const _p = _x_307.code;
   _M0MPB3Map3setGsRPB4JsonE($36$map, "code", new _M0DTPB4Json6String(_p));
-  const _p$2 = _x_303.path;
+  const _p$2 = _x_307.path;
   _M0MPB3Map3setGsRPB4JsonE($36$map, "path", new _M0DTPB4Json6String(_p$2));
-  const _p$3 = _x_303.message;
+  const _p$3 = _x_307.message;
   _M0MPB3Map3setGsRPB4JsonE($36$map, "message", new _M0DTPB4Json6String(_p$3));
   return new _M0DTPB4Json6Object($36$map);
 }
-function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x_284) {
-  let _de_path_287 = undefined;
-  let _de_message_286 = undefined;
-  let _de_code_285 = undefined;
-  if (_x_283.$tag === 6) {
-    const _Object = _x_283;
+function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_287, _x_288) {
+  let _de_path_291 = undefined;
+  let _de_message_290 = undefined;
+  let _de_code_289 = undefined;
+  if (_x_287.$tag === 6) {
+    const _Object = _x_287;
     const __map = _Object._0;
     const _bind = _M0MPB3Map3getGsRPB4JsonE(__map, "code");
     if (_bind === undefined) {
@@ -7575,7 +7576,7 @@ function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x
       const _Some = _bind;
       const __v = _Some;
       const _p = "code";
-      const _bind$2 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_284, _p));
+      const _bind$2 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_288, _p));
       let _tmp;
       if (_bind$2.$tag === 1) {
         const _ok = _bind$2;
@@ -7583,7 +7584,7 @@ function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x
       } else {
         return _bind$2;
       }
-      _de_code_285 = _tmp;
+      _de_code_289 = _tmp;
     }
     const _bind$2 = _M0MPB3Map3getGsRPB4JsonE(__map, "path");
     if (_bind$2 === undefined) {
@@ -7591,7 +7592,7 @@ function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x
       const _Some = _bind$2;
       const __v = _Some;
       const _p = "path";
-      const _bind$3 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_284, _p));
+      const _bind$3 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_288, _p));
       let _tmp;
       if (_bind$3.$tag === 1) {
         const _ok = _bind$3;
@@ -7599,7 +7600,7 @@ function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x
       } else {
         return _bind$3;
       }
-      _de_path_287 = _tmp;
+      _de_path_291 = _tmp;
     }
     const _bind$3 = _M0MPB3Map3getGsRPB4JsonE(__map, "message");
     if (_bind$3 === undefined) {
@@ -7607,7 +7608,7 @@ function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x
       const _Some = _bind$3;
       const __v = _Some;
       const _p = "message";
-      const _bind$4 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_284, _p));
+      const _bind$4 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_288, _p));
       let _tmp;
       if (_bind$4.$tag === 1) {
         const _ok = _bind$4;
@@ -7615,66 +7616,66 @@ function _M0IP28icyaaaww9moonguard5IssuePC14json8FromJson10from__json(_x_283, _x
       } else {
         return _bind$4;
       }
-      _de_message_286 = _tmp;
+      _de_message_290 = _tmp;
     }
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_284, _1: "Expected object to deserialize Issue" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_288, _1: "Expected object to deserialize Issue" }));
   }
-  const _bind = _de_path_287;
-  let _de_path_287$2;
+  const _bind = _de_path_291;
+  let _de_path_291$2;
   if (_bind === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_284, _1: "Missing field path" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_288, _1: "Missing field path" }));
   } else {
     const _Some = _bind;
-    _de_path_287$2 = _Some;
+    _de_path_291$2 = _Some;
   }
-  const _bind$2 = _de_message_286;
-  let _de_message_286$2;
+  const _bind$2 = _de_message_290;
+  let _de_message_290$2;
   if (_bind$2 === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_284, _1: "Missing field message" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_288, _1: "Missing field message" }));
   } else {
     const _Some = _bind$2;
-    _de_message_286$2 = _Some;
+    _de_message_290$2 = _Some;
   }
-  const _bind$3 = _de_code_285;
-  let _de_code_285$2;
+  const _bind$3 = _de_code_289;
+  let _de_code_289$2;
   if (_bind$3 === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_284, _1: "Missing field code" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_288, _1: "Missing field code" }));
   } else {
     const _Some = _bind$3;
-    _de_code_285$2 = _Some;
+    _de_code_289$2 = _Some;
   }
-  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard5Issue(_de_code_285$2, _de_path_287$2, _de_message_286$2));
+  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard5IssueRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard5Issue(_de_code_289$2, _de_path_291$2, _de_message_290$2));
 }
-function _M0IP28icyaaaww9moonguard6ChangePB2Eq5equal(_x_279, _x_280) {
-  return _x_279.path === _x_280.path && _M0IPC16option6OptionPB2Eq5equalGsE(_x_279.before, _x_280.before) && _M0IPC16option6OptionPB2Eq5equalGsE(_x_279.after, _x_280.after);
+function _M0IP28icyaaaww9moonguard6ChangePB2Eq5equal(_x_283, _x_284) {
+  return _x_283.path === _x_284.path && _M0IPC16option6OptionPB2Eq5equalGsE(_x_283.before, _x_284.before) && _M0IPC16option6OptionPB2Eq5equalGsE(_x_283.after, _x_284.after);
 }
-function _M0IP28icyaaaww9moonguard4PlanPB2Eq5equal(_x_273, _x_274) {
-  return _x_273.schema === _x_274.schema && _x_273.title === _x_274.title && _M0IP28icyaaaww9moonguard8SnapshotPB2Eq5equal(_x_273.baseline, _x_274.baseline) && _M0IP28icyaaaww9moonguard8SnapshotPB2Eq5equal(_x_273.result, _x_274.result) && _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard9OperationE(_x_273.operations, _x_274.operations) && _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard6ChangeE(_x_273.changes, _x_274.changes) && _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard5IssueE(_x_273.issues, _x_274.issues);
+function _M0IP28icyaaaww9moonguard4PlanPB2Eq5equal(_x_277, _x_278) {
+  return _x_277.schema === _x_278.schema && _x_277.title === _x_278.title && _M0IP28icyaaaww9moonguard8SnapshotPB2Eq5equal(_x_277.baseline, _x_278.baseline) && _M0IP28icyaaaww9moonguard8SnapshotPB2Eq5equal(_x_277.result, _x_278.result) && _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard9OperationE(_x_277.operations, _x_278.operations) && _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard6ChangeE(_x_277.changes, _x_278.changes) && _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard5IssueE(_x_277.issues, _x_278.issues);
 }
-function _M0IP28icyaaaww9moonguard4PlanPB6ToJson8to__json(_x_268) {
+function _M0IP28icyaaaww9moonguard4PlanPB6ToJson8to__json(_x_272) {
   const _bind = [];
   const $36$map = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind, 0, 0), undefined);
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "schema", _M0IPC13int3IntPB6ToJson8to__json(_x_268.schema));
-  const _p = _x_268.title;
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "schema", _M0IPC13int3IntPB6ToJson8to__json(_x_272.schema));
+  const _p = _x_272.title;
   _M0MPB3Map3setGsRPB4JsonE($36$map, "title", new _M0DTPB4Json6String(_p));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "baseline", _M0IP28icyaaaww9moonguard8SnapshotPB6ToJson8to__json(_x_268.baseline));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "result", _M0IP28icyaaaww9moonguard8SnapshotPB6ToJson8to__json(_x_268.result));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "operations", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard9OperationE(_x_268.operations));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "changes", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard6ChangeE(_x_268.changes));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "issues", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard5IssueE(_x_268.issues));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "baseline", _M0IP28icyaaaww9moonguard8SnapshotPB6ToJson8to__json(_x_272.baseline));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "result", _M0IP28icyaaaww9moonguard8SnapshotPB6ToJson8to__json(_x_272.result));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "operations", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard9OperationE(_x_272.operations));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "changes", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard6ChangeE(_x_272.changes));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "issues", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard5IssueE(_x_272.issues));
   return new _M0DTPB4Json6Object($36$map);
 }
-function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_229) {
-  let _de_title_236 = undefined;
-  let _de_schema_235 = undefined;
-  let _de_result_234 = undefined;
-  let _de_operations_233 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard9OperationEE4None__;
-  let _de_issues_232 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard5IssueEE4None__;
-  let _de_changes_231 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard6ChangeEE4None__;
-  let _de_baseline_230 = undefined;
-  if (_x_228.$tag === 6) {
-    const _Object = _x_228;
+function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_232, _x_233) {
+  let _de_title_240 = undefined;
+  let _de_schema_239 = undefined;
+  let _de_result_238 = undefined;
+  let _de_operations_237 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard9OperationEE4None__;
+  let _de_issues_236 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard5IssueEE4None__;
+  let _de_changes_235 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard6ChangeEE4None__;
+  let _de_baseline_234 = undefined;
+  if (_x_232.$tag === 6) {
+    const _Object = _x_232;
     const __map = _Object._0;
     const _bind = _M0MPB3Map3getGsRPB4JsonE(__map, "schema");
     if (_bind === undefined) {
@@ -7682,7 +7683,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind;
       const __v = _Some;
       const _p = "schema";
-      const _bind$2 = _M0IPC13int3IntPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$2 = _M0IPC13int3IntPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$2.$tag === 1) {
         const _ok = _bind$2;
@@ -7690,7 +7691,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$2;
       }
-      _de_schema_235 = _tmp;
+      _de_schema_239 = _tmp;
     }
     const _bind$2 = _M0MPB3Map3getGsRPB4JsonE(__map, "title");
     if (_bind$2 === undefined) {
@@ -7698,7 +7699,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind$2;
       const __v = _Some;
       const _p = "title";
-      const _bind$3 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$3 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$3.$tag === 1) {
         const _ok = _bind$3;
@@ -7706,7 +7707,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$3;
       }
-      _de_title_236 = _tmp;
+      _de_title_240 = _tmp;
     }
     const _bind$3 = _M0MPB3Map3getGsRPB4JsonE(__map, "baseline");
     if (_bind$3 === undefined) {
@@ -7714,7 +7715,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind$3;
       const __v = _Some;
       const _p = "baseline";
-      const _bind$4 = _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$4 = _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$4.$tag === 1) {
         const _ok = _bind$4;
@@ -7722,7 +7723,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$4;
       }
-      _de_baseline_230 = _tmp;
+      _de_baseline_234 = _tmp;
     }
     const _bind$4 = _M0MPB3Map3getGsRPB4JsonE(__map, "result");
     if (_bind$4 === undefined) {
@@ -7730,7 +7731,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind$4;
       const __v = _Some;
       const _p = "result";
-      const _bind$5 = _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$5 = _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$5.$tag === 1) {
         const _ok = _bind$5;
@@ -7738,7 +7739,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$5;
       }
-      _de_result_234 = _tmp;
+      _de_result_238 = _tmp;
     }
     const _bind$5 = _M0MPB3Map3getGsRPB4JsonE(__map, "operations");
     if (_bind$5 === undefined) {
@@ -7746,7 +7747,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind$5;
       const __v = _Some;
       const _p = "operations";
-      const _bind$6 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard9OperationE(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$6 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard9OperationE(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$6.$tag === 1) {
         const _ok = _bind$6;
@@ -7754,7 +7755,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$6;
       }
-      _de_operations_233 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard9OperationEE4Some(_tmp);
+      _de_operations_237 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard9OperationEE4Some(_tmp);
     }
     const _bind$6 = _M0MPB3Map3getGsRPB4JsonE(__map, "changes");
     if (_bind$6 === undefined) {
@@ -7762,7 +7763,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind$6;
       const __v = _Some;
       const _p = "changes";
-      const _bind$7 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard6ChangeE(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$7 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard6ChangeE(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$7.$tag === 1) {
         const _ok = _bind$7;
@@ -7770,7 +7771,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$7;
       }
-      _de_changes_231 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard6ChangeEE4Some(_tmp);
+      _de_changes_235 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard6ChangeEE4Some(_tmp);
     }
     const _bind$7 = _M0MPB3Map3getGsRPB4JsonE(__map, "issues");
     if (_bind$7 === undefined) {
@@ -7778,7 +7779,7 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       const _Some = _bind$7;
       const __v = _Some;
       const _p = "issues";
-      const _bind$8 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard5IssueE(__v, new _M0DTPC14json8JsonPath3Key(_x_229, _p));
+      const _bind$8 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard5IssueE(__v, new _M0DTPC14json8JsonPath3Key(_x_233, _p));
       let _tmp;
       if (_bind$8.$tag === 1) {
         const _ok = _bind$8;
@@ -7786,86 +7787,86 @@ function _M0IP28icyaaaww9moonguard4PlanPC14json8FromJson10from__json(_x_228, _x_
       } else {
         return _bind$8;
       }
-      _de_issues_232 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard5IssueEE4Some(_tmp);
+      _de_issues_236 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard5IssueEE4Some(_tmp);
     }
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Expected object to deserialize Plan" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Expected object to deserialize Plan" }));
   }
-  const _bind = _de_title_236;
-  let _de_title_236$2;
+  const _bind = _de_title_240;
+  let _de_title_240$2;
   if (_bind === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field title" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field title" }));
   } else {
     const _Some = _bind;
-    _de_title_236$2 = _Some;
+    _de_title_240$2 = _Some;
   }
-  const _bind$2 = _de_schema_235;
-  let _de_schema_235$2;
+  const _bind$2 = _de_schema_239;
+  let _de_schema_239$2;
   if (_bind$2 === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field schema" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field schema" }));
   } else {
     const _Some = _bind$2;
-    _de_schema_235$2 = _Some;
+    _de_schema_239$2 = _Some;
   }
-  const _bind$3 = _de_result_234;
-  let _de_result_234$2;
+  const _bind$3 = _de_result_238;
+  let _de_result_238$2;
   if (_bind$3 === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field result" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field result" }));
   } else {
     const _Some = _bind$3;
-    _de_result_234$2 = _Some;
+    _de_result_238$2 = _Some;
   }
-  const _bind$4 = _de_operations_233;
-  let _de_operations_233$2;
+  const _bind$4 = _de_operations_237;
+  let _de_operations_237$2;
   if (_bind$4.$tag === 1) {
     const _Some = _bind$4;
-    _de_operations_233$2 = _Some._0;
+    _de_operations_237$2 = _Some._0;
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field operations" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field operations" }));
   }
-  const _bind$5 = _de_issues_232;
-  let _de_issues_232$2;
+  const _bind$5 = _de_issues_236;
+  let _de_issues_236$2;
   if (_bind$5.$tag === 1) {
     const _Some = _bind$5;
-    _de_issues_232$2 = _Some._0;
+    _de_issues_236$2 = _Some._0;
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field issues" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field issues" }));
   }
-  const _bind$6 = _de_changes_231;
-  let _de_changes_231$2;
+  const _bind$6 = _de_changes_235;
+  let _de_changes_235$2;
   if (_bind$6.$tag === 1) {
     const _Some = _bind$6;
-    _de_changes_231$2 = _Some._0;
+    _de_changes_235$2 = _Some._0;
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field changes" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field changes" }));
   }
-  const _bind$7 = _de_baseline_230;
-  let _de_baseline_230$2;
+  const _bind$7 = _de_baseline_234;
+  let _de_baseline_234$2;
   if (_bind$7 === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_229, _1: "Missing field baseline" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_233, _1: "Missing field baseline" }));
   } else {
     const _Some = _bind$7;
-    _de_baseline_230$2 = _Some;
+    _de_baseline_234$2 = _Some;
   }
-  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard4Plan(_de_schema_235$2, _de_title_236$2, _de_baseline_230$2, _de_result_234$2, _de_operations_233$2, _de_changes_231$2, _de_issues_232$2));
+  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4PlanRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard4Plan(_de_schema_239$2, _de_title_240$2, _de_baseline_234$2, _de_result_238$2, _de_operations_237$2, _de_changes_235$2, _de_issues_236$2));
 }
-function _M0IP28icyaaaww9moonguard8SnapshotPB2Eq5equal(_x_224, _x_225) {
-  return _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard4FileE(_x_224.files, _x_225.files) && _M0IPC15array5ArrayPB2Eq5equalGsE(_x_224.folders, _x_225.folders) && _M0IPC15array5ArrayPB2Eq5equalGsE(_x_224.blocked, _x_225.blocked);
+function _M0IP28icyaaaww9moonguard8SnapshotPB2Eq5equal(_x_228, _x_229) {
+  return _M0IPC15array5ArrayPB2Eq5equalGRP28icyaaaww9moonguard4FileE(_x_228.files, _x_229.files) && _M0IPC15array5ArrayPB2Eq5equalGsE(_x_228.folders, _x_229.folders) && _M0IPC15array5ArrayPB2Eq5equalGsE(_x_228.blocked, _x_229.blocked);
 }
-function _M0IP28icyaaaww9moonguard8SnapshotPB6ToJson8to__json(_x_219) {
+function _M0IP28icyaaaww9moonguard8SnapshotPB6ToJson8to__json(_x_223) {
   const _bind = [];
   const $36$map = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind, 0, 0), undefined);
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "files", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard4FileE(_x_219.files));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "folders", _M0IPC15array5ArrayPB6ToJson8to__jsonGsE(_x_219.folders));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "blocked", _M0IPC15array5ArrayPB6ToJson8to__jsonGsE(_x_219.blocked));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "files", _M0IPC15array5ArrayPB6ToJson8to__jsonGRP28icyaaaww9moonguard4FileE(_x_223.files));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "folders", _M0IPC15array5ArrayPB6ToJson8to__jsonGsE(_x_223.folders));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "blocked", _M0IPC15array5ArrayPB6ToJson8to__jsonGsE(_x_223.blocked));
   return new _M0DTPB4Json6Object($36$map);
 }
-function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199, _x_200) {
-  let _de_folders_203 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
-  let _de_files_202 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard4FileEE4None__;
-  let _de_blocked_201 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
-  if (_x_199.$tag === 6) {
-    const _Object = _x_199;
+function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_203, _x_204) {
+  let _de_folders_207 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
+  let _de_files_206 = _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard4FileEE4None__;
+  let _de_blocked_205 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
+  if (_x_203.$tag === 6) {
+    const _Object = _x_203;
     const __map = _Object._0;
     const _bind = _M0MPB3Map3getGsRPB4JsonE(__map, "files");
     if (_bind === undefined) {
@@ -7873,7 +7874,7 @@ function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199,
       const _Some = _bind;
       const __v = _Some;
       const _p = "files";
-      const _bind$2 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard4FileE(__v, new _M0DTPC14json8JsonPath3Key(_x_200, _p));
+      const _bind$2 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGRP28icyaaaww9moonguard4FileE(__v, new _M0DTPC14json8JsonPath3Key(_x_204, _p));
       let _tmp;
       if (_bind$2.$tag === 1) {
         const _ok = _bind$2;
@@ -7881,7 +7882,7 @@ function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199,
       } else {
         return _bind$2;
       }
-      _de_files_202 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard4FileEE4Some(_tmp);
+      _de_files_206 = new _M0DTPC16option6OptionGRPB5ArrayGRP28icyaaaww9moonguard4FileEE4Some(_tmp);
     }
     const _bind$2 = _M0MPB3Map3getGsRPB4JsonE(__map, "folders");
     if (_bind$2 === undefined) {
@@ -7889,7 +7890,7 @@ function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199,
       const _Some = _bind$2;
       const __v = _Some;
       const _p = "folders";
-      const _bind$3 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGsE(__v, new _M0DTPC14json8JsonPath3Key(_x_200, _p));
+      const _bind$3 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGsE(__v, new _M0DTPC14json8JsonPath3Key(_x_204, _p));
       let _tmp;
       if (_bind$3.$tag === 1) {
         const _ok = _bind$3;
@@ -7897,7 +7898,7 @@ function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199,
       } else {
         return _bind$3;
       }
-      _de_folders_203 = new _M0DTPC16option6OptionGRPB5ArrayGsEE4Some(_tmp);
+      _de_folders_207 = new _M0DTPC16option6OptionGRPB5ArrayGsEE4Some(_tmp);
     }
     const _bind$3 = _M0MPB3Map3getGsRPB4JsonE(__map, "blocked");
     if (_bind$3 === undefined) {
@@ -7905,7 +7906,7 @@ function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199,
       const _Some = _bind$3;
       const __v = _Some;
       const _p = "blocked";
-      const _bind$4 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGsE(__v, new _M0DTPC14json8JsonPath3Key(_x_200, _p));
+      const _bind$4 = _M0IPC15array5ArrayPC14json8FromJson10from__jsonGsE(__v, new _M0DTPC14json8JsonPath3Key(_x_204, _p));
       let _tmp;
       if (_bind$4.$tag === 1) {
         const _ok = _bind$4;
@@ -7913,51 +7914,51 @@ function _M0IP28icyaaaww9moonguard8SnapshotPC14json8FromJson10from__json(_x_199,
       } else {
         return _bind$4;
       }
-      _de_blocked_201 = new _M0DTPC16option6OptionGRPB5ArrayGsEE4Some(_tmp);
+      _de_blocked_205 = new _M0DTPC16option6OptionGRPB5ArrayGsEE4Some(_tmp);
     }
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_200, _1: "Expected object to deserialize Snapshot" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_204, _1: "Expected object to deserialize Snapshot" }));
   }
-  const _bind = _de_folders_203;
-  let _de_folders_203$2;
+  const _bind = _de_folders_207;
+  let _de_folders_207$2;
   if (_bind.$tag === 1) {
     const _Some = _bind;
-    _de_folders_203$2 = _Some._0;
+    _de_folders_207$2 = _Some._0;
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_200, _1: "Missing field folders" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_204, _1: "Missing field folders" }));
   }
-  const _bind$2 = _de_files_202;
-  let _de_files_202$2;
+  const _bind$2 = _de_files_206;
+  let _de_files_206$2;
   if (_bind$2.$tag === 1) {
     const _Some = _bind$2;
-    _de_files_202$2 = _Some._0;
+    _de_files_206$2 = _Some._0;
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_200, _1: "Missing field files" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_204, _1: "Missing field files" }));
   }
-  const _bind$3 = _de_blocked_201;
-  let _de_blocked_201$2;
+  const _bind$3 = _de_blocked_205;
+  let _de_blocked_205$2;
   if (_bind$3.$tag === 1) {
     const _Some = _bind$3;
-    _de_blocked_201$2 = _Some._0;
+    _de_blocked_205$2 = _Some._0;
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_200, _1: "Missing field blocked" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_204, _1: "Missing field blocked" }));
   }
-  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard8Snapshot(_de_files_202$2, _de_folders_203$2, _de_blocked_201$2));
+  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard8SnapshotRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard8Snapshot(_de_files_206$2, _de_folders_207$2, _de_blocked_205$2));
 }
-function _M0IP28icyaaaww9moonguard4FilePB6ToJson8to__json(_x_190) {
+function _M0IP28icyaaaww9moonguard4FilePB6ToJson8to__json(_x_194) {
   const _bind = [];
   const $36$map = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind, 0, 0), undefined);
-  const _p = _x_190.path;
+  const _p = _x_194.path;
   _M0MPB3Map3setGsRPB4JsonE($36$map, "path", new _M0DTPB4Json6String(_p));
-  const _p$2 = _x_190.content;
+  const _p$2 = _x_194.content;
   _M0MPB3Map3setGsRPB4JsonE($36$map, "content", new _M0DTPB4Json6String(_p$2));
   return new _M0DTPB4Json6Object($36$map);
 }
-function _M0IP28icyaaaww9moonguard4FilePC14json8FromJson10from__json(_x_175, _x_176) {
-  let _de_path_178 = undefined;
-  let _de_content_177 = undefined;
-  if (_x_175.$tag === 6) {
-    const _Object = _x_175;
+function _M0IP28icyaaaww9moonguard4FilePC14json8FromJson10from__json(_x_179, _x_180) {
+  let _de_path_182 = undefined;
+  let _de_content_181 = undefined;
+  if (_x_179.$tag === 6) {
+    const _Object = _x_179;
     const __map = _Object._0;
     const _bind = _M0MPB3Map3getGsRPB4JsonE(__map, "path");
     if (_bind === undefined) {
@@ -7965,7 +7966,7 @@ function _M0IP28icyaaaww9moonguard4FilePC14json8FromJson10from__json(_x_175, _x_
       const _Some = _bind;
       const __v = _Some;
       const _p = "path";
-      const _bind$2 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_176, _p));
+      const _bind$2 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_180, _p));
       let _tmp;
       if (_bind$2.$tag === 1) {
         const _ok = _bind$2;
@@ -7973,7 +7974,7 @@ function _M0IP28icyaaaww9moonguard4FilePC14json8FromJson10from__json(_x_175, _x_
       } else {
         return _bind$2;
       }
-      _de_path_178 = _tmp;
+      _de_path_182 = _tmp;
     }
     const _bind$2 = _M0MPB3Map3getGsRPB4JsonE(__map, "content");
     if (_bind$2 === undefined) {
@@ -7981,7 +7982,7 @@ function _M0IP28icyaaaww9moonguard4FilePC14json8FromJson10from__json(_x_175, _x_
       const _Some = _bind$2;
       const __v = _Some;
       const _p = "content";
-      const _bind$3 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_176, _p));
+      const _bind$3 = _M0IPC16string6StringPC14json8FromJson10from__json(__v, new _M0DTPC14json8JsonPath3Key(_x_180, _p));
       let _tmp;
       if (_bind$3.$tag === 1) {
         const _ok = _bind$3;
@@ -7989,31 +7990,31 @@ function _M0IP28icyaaaww9moonguard4FilePC14json8FromJson10from__json(_x_175, _x_
       } else {
         return _bind$3;
       }
-      _de_content_177 = _tmp;
+      _de_content_181 = _tmp;
     }
   } else {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_176, _1: "Expected object to deserialize File" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_180, _1: "Expected object to deserialize File" }));
   }
-  const _bind = _de_path_178;
-  let _de_path_178$2;
+  const _bind = _de_path_182;
+  let _de_path_182$2;
   if (_bind === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_176, _1: "Missing field path" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_180, _1: "Missing field path" }));
   } else {
     const _Some = _bind;
-    _de_path_178$2 = _Some;
+    _de_path_182$2 = _Some;
   }
-  const _bind$2 = _de_content_177;
-  let _de_content_177$2;
+  const _bind$2 = _de_content_181;
+  let _de_content_181$2;
   if (_bind$2 === undefined) {
-    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_176, _1: "Missing field content" }));
+    return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE3Err(new _M0DTPC15error5Error61moonbitlang_2fcore_2fjson_2eJsonDecodeError_2eJsonDecodeError({ _0: _x_180, _1: "Missing field content" }));
   } else {
     const _Some = _bind$2;
-    _de_content_177$2 = _Some;
+    _de_content_181$2 = _Some;
   }
-  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard4File(_de_path_178$2, _de_content_177$2));
+  return new _M0DTPC16result6ResultGRP28icyaaaww9moonguard4FileRPC14json15JsonDecodeErrorE2Ok(new _M0TP28icyaaaww9moonguard4File(_de_path_182$2, _de_content_181$2));
 }
-function _M0IP28icyaaaww9moonguard9OperationPB2Eq5equal(_x_171, _x_172) {
-  return _x_171.kind === _x_172.kind && _x_171.path === _x_172.path && _M0IPC16option6OptionPB2Eq5equalGsE(_x_171.to, _x_172.to) && _M0IPC16option6OptionPB2Eq5equalGsE(_x_171.content, _x_172.content);
+function _M0IP28icyaaaww9moonguard9OperationPB2Eq5equal(_x_175, _x_176) {
+  return _x_175.kind === _x_176.kind && _x_175.path === _x_176.path && _M0IPC16option6OptionPB2Eq5equalGsE(_x_175.to, _x_176.to) && _M0IPC16option6OptionPB2Eq5equalGsE(_x_175.content, _x_176.content);
 }
 function _M0FP28icyaaaww9moonguard14nullable__json(value) {
   if (value === undefined) {
@@ -8931,7 +8932,8 @@ function _M0FP28icyaaaww9moonguard14relative__link(from, target) {
 function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, moved) {
   const output = [];
   let fence = "";
-  const _it = _M0MPC16string6String5split(content, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2917, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2917.length));
+  let fence_length = 0;
+  const _it = _M0MPC16string6String5split(content, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2916, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2916.length));
   while (true) {
     const _bind = _M0MPB4Iter4nextGUsRPB4JsonEE(_it);
     if (_bind === undefined) {
@@ -8940,22 +8942,100 @@ function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, 
       const _Some = _bind;
       const _line_view = _Some;
       const line = _M0MPC16string10StringView9to__owned(_line_view);
-      const trimmed = _M0MPC16string10StringView9to__owned(_M0MPC16string6String4trim(line, undefined));
-      if (_M0MPC16string6String11has__prefix(trimmed, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2918, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2918.length)) || _M0MPC16string6String11has__prefix(trimmed, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2919, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2919.length))) {
-        const marker = _M0MPC16string10StringView9to__owned(_M0MPC16string6String21clamped__view_2einner(trimmed, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN6constrS2916));
-        if (fence === "") {
-          fence = marker;
+      let indent = 0;
+      while (true) {
+        let _tmp;
+        if (indent < line.length) {
+          const _tmp$2 = indent;
+          const _p = _tmp$2 >>> 0 < line.length ? line.charCodeAt(_tmp$2) : $oob();
+          const _p$2 = 32;
+          _tmp = _p === _p$2;
         } else {
-          if (fence === marker) {
-            fence = "";
+          _tmp = false;
+        }
+        if (_tmp) {
+          indent = indent + 1 | 0;
+          continue;
+        } else {
+          break;
+        }
+      }
+      const trimmed = _M0MPC16string10StringView9to__owned(_M0MPC16string6String21clamped__view_2einner(line, indent, undefined));
+      const marker = _M0MPC16string6String11has__prefix(trimmed, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2917, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2917.length)) ? "`" : _M0MPC16string6String11has__prefix(trimmed, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2918, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2918.length)) ? "~" : "";
+      let _tmp;
+      if (indent <= 3) {
+        const _p = "";
+        _tmp = !(marker === _p);
+      } else {
+        _tmp = false;
+      }
+      if (_tmp) {
+        let count = 0;
+        while (true) {
+          let _tmp$2;
+          if (count < trimmed.length) {
+            const _tmp$3 = count;
+            const _p = _tmp$3 >>> 0 < trimmed.length ? trimmed.charCodeAt(_tmp$3) : $oob();
+            const _p$2 = 0 >>> 0 < marker.length ? marker.charCodeAt(0) : $oob();
+            _tmp$2 = _p === _p$2;
+          } else {
+            _tmp$2 = false;
+          }
+          if (_tmp$2) {
+            count = count + 1 | 0;
+            continue;
+          } else {
+            break;
           }
         }
-        _M0MPC15array5Array4pushGRPC14json10WriteFrameE(output, line);
-        continue;
+        const tail = _M0MPC16string10StringView9to__owned(_M0MPC16string6String21clamped__view_2einner(trimmed, count, undefined));
+        const _p = fence;
+        const _p$2 = "";
+        if (!(_p === _p$2)) {
+          let _tmp$2;
+          if (marker === fence) {
+            let _tmp$3;
+            if (count >= fence_length) {
+              const _p$3 = _M0MPC16string6String4trim(tail, undefined);
+              _tmp$3 = (_p$3.end - _p$3.start | 0) === 0;
+            } else {
+              _tmp$3 = false;
+            }
+            _tmp$2 = _tmp$3;
+          } else {
+            _tmp$2 = false;
+          }
+          if (_tmp$2) {
+            fence = "";
+            fence_length = 0;
+          }
+          _M0MPC15array5Array4pushGRPC14json10WriteFrameE(output, line);
+          continue;
+        } else {
+          let _tmp$2;
+          const _p$3 = "`";
+          if (!(marker === _p$3)) {
+            _tmp$2 = true;
+          } else {
+            _tmp$2 = !_M0MPC16string6String8contains(tail, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2919, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2919.length));
+          }
+          if (_tmp$2) {
+            fence = marker;
+            fence_length = count;
+            _M0MPC15array5Array4pushGRPC14json10WriteFrameE(output, line);
+            continue;
+          }
+        }
       }
+      let _tmp$2;
       const _p = fence;
       const _p$2 = "";
       if (!(_p === _p$2)) {
+        _tmp$2 = true;
+      } else {
+        _tmp$2 = indent >= 4 || _M0MPC16string6String11has__prefix(line, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2920, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2920.length));
+      }
+      if (_tmp$2) {
         _M0MPC15array5Array4pushGRPC14json10WriteFrameE(output, line);
         continue;
       }
@@ -8964,22 +9044,22 @@ function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, 
       let ticks = 0;
       while (true) {
         if (i < line.length) {
-          const _tmp = i;
-          const _p$3 = _tmp >>> 0 < line.length ? line.charCodeAt(_tmp) : $oob();
+          const _tmp$3 = i;
+          const _p$3 = _tmp$3 >>> 0 < line.length ? line.charCodeAt(_tmp$3) : $oob();
           const _p$4 = 96;
           if (_p$3 === _p$4) {
             const start = i;
             while (true) {
-              let _tmp$2;
+              let _tmp$4;
               if (i < line.length) {
-                const _tmp$3 = i;
-                const _p$5 = _tmp$3 >>> 0 < line.length ? line.charCodeAt(_tmp$3) : $oob();
+                const _tmp$5 = i;
+                const _p$5 = _tmp$5 >>> 0 < line.length ? line.charCodeAt(_tmp$5) : $oob();
                 const _p$6 = 96;
-                _tmp$2 = _p$5 === _p$6;
+                _tmp$4 = _p$5 === _p$6;
               } else {
-                _tmp$2 = false;
+                _tmp$4 = false;
               }
-              if (_tmp$2) {
+              if (_tmp$4) {
                 i = i + 1 | 0;
                 continue;
               } else {
@@ -8997,44 +9077,44 @@ function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, 
             _M0IPB13StringBuilderPB6Logger13write__string(text, _M0MPC16string10StringView9to__owned(_M0MPC16string6String21clamped__view_2einner(line, start, i)));
             continue;
           }
-          let _tmp$2;
+          let _tmp$4;
           if (ticks === 0) {
-            let _tmp$3;
-            const _tmp$4 = i;
-            const _p$5 = _tmp$4 >>> 0 < line.length ? line.charCodeAt(_tmp$4) : $oob();
+            let _tmp$5;
+            const _tmp$6 = i;
+            const _p$5 = _tmp$6 >>> 0 < line.length ? line.charCodeAt(_tmp$6) : $oob();
             const _p$6 = 93;
             if (_p$5 === _p$6) {
-              let _tmp$5;
+              let _tmp$7;
               if ((i + 1 | 0) < line.length) {
-                const _tmp$6 = i + 1 | 0;
-                const _p$7 = _tmp$6 >>> 0 < line.length ? line.charCodeAt(_tmp$6) : $oob();
+                const _tmp$8 = i + 1 | 0;
+                const _p$7 = _tmp$8 >>> 0 < line.length ? line.charCodeAt(_tmp$8) : $oob();
                 const _p$8 = 40;
-                _tmp$5 = _p$7 === _p$8;
+                _tmp$7 = _p$7 === _p$8;
               } else {
-                _tmp$5 = false;
+                _tmp$7 = false;
               }
-              _tmp$3 = _tmp$5;
+              _tmp$5 = _tmp$7;
             } else {
-              _tmp$3 = false;
+              _tmp$5 = false;
             }
-            _tmp$2 = _tmp$3;
+            _tmp$4 = _tmp$5;
           } else {
-            _tmp$2 = false;
+            _tmp$4 = false;
           }
-          if (_tmp$2) {
+          if (_tmp$4) {
             const start = i + 2 | 0;
             let end = start;
             while (true) {
-              let _tmp$3;
+              let _tmp$5;
               if (end < line.length) {
-                const _tmp$4 = end;
-                const _p$5 = _tmp$4 >>> 0 < line.length ? line.charCodeAt(_tmp$4) : $oob();
+                const _tmp$6 = end;
+                const _p$5 = _tmp$6 >>> 0 < line.length ? line.charCodeAt(_tmp$6) : $oob();
                 const _p$6 = 41;
-                _tmp$3 = _p$5 !== _p$6;
+                _tmp$5 = _p$5 !== _p$6;
               } else {
-                _tmp$3 = false;
+                _tmp$5 = false;
               }
-              if (_tmp$3) {
+              if (_tmp$5) {
                 end = end + 1 | 0;
                 continue;
               } else {
@@ -9043,8 +9123,8 @@ function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, 
             }
             if (end < line.length) {
               const raw = _M0MPC16string10StringView9to__owned(_M0MPC16string6String21clamped__view_2einner(line, start, end));
-              if (!_M0MPC16string6String8contains(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2920, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2920.length)) && (!_M0MPC16string6String8contains(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2921, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2921.length)) && (!_M0MPC16string6String8contains(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2922, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2922.length)) && !_M0MPC16string6String11has__prefix(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2923, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2923.length))))) {
-                const pieces = _M0MPB4Iter9to__arrayGRPC16string10StringViewE(_M0MPB4Iter3mapGRPC16string10StringViewsE(_M0MPC16string6String5split(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2924, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2924.length)), (x) => _M0MPC16string10StringView9to__owned(x)));
+              if (!_M0MPC16string6String8contains(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2921, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2921.length)) && (!_M0MPC16string6String8contains(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2922, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2922.length)) && (!_M0MPC16string6String8contains(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2923, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2923.length)) && !_M0MPC16string6String11has__prefix(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2924, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2924.length))))) {
+                const pieces = _M0MPB4Iter9to__arrayGRPC16string10StringViewE(_M0MPB4Iter3mapGRPC16string10StringViewsE(_M0MPC16string6String5split(raw, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2925, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2925.length)), (x) => _M0MPC16string10StringView9to__owned(x)));
                 const target = _M0MPC15array5Array2atGRPB4JsonE(pieces, 0);
                 const _bind$2 = _M0FP28icyaaaww9moonguard13resolve__link(old_path, target);
                 if (_bind$2 === undefined) {
@@ -9052,7 +9132,7 @@ function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, 
                   const _Some$2 = _bind$2;
                   const _resolved = _Some$2;
                   const destination = _M0MPC16option6Option10unwrap__orGsE(_M0MPB3Map3getGssE(moved, _resolved), _resolved);
-                  const suffix = pieces.length > 1 ? `#${_M0MPC15array5Array4joinGsE(_M0MPC15array9ArrayView9to__ownedGsE(_M0MPC15array5Array21clamped__view_2einnerGsE(pieces, 1, undefined)), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2925, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2925.length))}` : "";
+                  const suffix = pieces.length > 1 ? `#${_M0MPC15array5Array4joinGsE(_M0MPC15array9ArrayView9to__ownedGsE(_M0MPC15array5Array21clamped__view_2einnerGsE(pieces, 1, undefined)), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2926, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2926.length))}` : "";
                   _M0IPB13StringBuilderPB6Logger13write__string(text, `](${_M0FP28icyaaaww9moonguard14relative__link(new_path, destination)}${suffix})`);
                   i = end + 1 | 0;
                   continue;
@@ -9073,7 +9153,7 @@ function _M0FP28icyaaaww9moonguard14rewrite__links(content, old_path, new_path, 
       continue;
     }
   }
-  return _M0MPC15array5Array4joinGsE(output, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2926, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2926.length));
+  return _M0MPC15array5Array4joinGsE(output, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2927, 0, _M0FP28icyaaaww9moonguard14rewrite__linksN7_2abindS2927.length));
 }
 function _M0FP28icyaaaww9moonguard8organize(snapshot) {
   const _bind = [];
@@ -9086,13 +9166,13 @@ function _M0FP28icyaaaww9moonguard8organize(snapshot) {
     const _ = _tmp;
     if (_ < _bind$3) {
       const file = _bind$2[_];
-      if (!_M0MPC16string6String8contains(file.path, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2961, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2961.length)) && _M0MPC16string6String11has__suffix(_M0MPC16string6String9to__lower(file.path), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2962, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2962.length))) {
+      if (!_M0MPC16string6String8contains(file.path, new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2968, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2968.length)) && _M0MPC16string6String11has__suffix(_M0MPC16string6String9to__lower(file.path), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2969, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2969.length))) {
         const _bind$4 = _M0FP28icyaaaww9moonguard8category(file.content);
         if (_bind$4 === undefined) {
         } else {
           const _Some = _bind$4;
           const _category = _Some;
-          const name = _M0MPC16string6String12replace__all(_M0MPC16string6String9to__lower(file.path), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2963, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2963.length), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2964, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2964.length));
+          const name = _M0MPC16string6String12replace__all(_M0MPC16string6String9to__lower(file.path), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2970, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2970.length), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2971, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2971.length));
           const target = `docs/${_category}/${name}`;
           _M0MPB3Map3setGssE(moved, file.path, target);
           _M0MPC15array5Array4pushGRPC14json10WriteFrameE(operations, new _M0TP28icyaaaww9moonguard9Operation("move", file.path, target, undefined));
@@ -9111,7 +9191,7 @@ function _M0FP28icyaaaww9moonguard8organize(snapshot) {
     const _ = _tmp$2;
     if (_ < _bind$5) {
       const file = _bind$4[_];
-      if (_M0MPC16string6String11has__suffix(_M0MPC16string6String9to__lower(file.path), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2965, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2965.length))) {
+      if (_M0MPC16string6String11has__suffix(_M0MPC16string6String9to__lower(file.path), new _M0TPC16string10StringView(_M0FP28icyaaaww9moonguard8organizeN7_2abindS2972, 0, _M0FP28icyaaaww9moonguard8organizeN7_2abindS2972.length))) {
         const new_path = _M0MPC16option6Option10unwrap__orGsE(_M0MPB3Map3getGssE(moved, file.path), file.path);
         const content = _M0FP28icyaaaww9moonguard14rewrite__links(file.content, file.path, new_path, moved);
         const _p = file.content;

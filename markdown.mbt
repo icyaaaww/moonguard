@@ -97,20 +97,44 @@ pub fn rewrite_links(
 ) -> String {
   let output = []
   let mut fence = ""
+  let mut fence_length = 0
   for line_view in content.split("\n") {
     let line = line_view.to_owned()
-    let trimmed = line.trim().to_owned()
-    if trimmed.has_prefix("```") || trimmed.has_prefix("~~~") {
-      let marker = trimmed[:3].to_owned()
-      if fence == "" {
-        fence = marker
-      } else if fence == marker {
-        fence = ""
-      }
-      output.push(line)
-      continue
+    let mut indent = 0
+    while indent < line.length() && line[indent] == ' ' {
+      indent += 1
     }
-    if fence != "" {
+    let trimmed = line[indent:].to_owned()
+    let marker = if trimmed.has_prefix("```") {
+      "`"
+    } else if trimmed.has_prefix("~~~") {
+      "~"
+    } else {
+      ""
+    }
+    if indent <= 3 && marker != "" {
+      let mut count = 0
+      while count < trimmed.length() && trimmed[count] == marker[0] {
+        count += 1
+      }
+      let tail = trimmed[count:].to_owned()
+      if fence != "" {
+        // A shorter run, another marker, or trailing text is code content.
+        if marker == fence && count >= fence_length && tail.trim().is_empty() {
+          fence = ""
+          fence_length = 0
+        }
+        output.push(line)
+        continue
+      } else if marker != "`" || !tail.contains("`") {
+        fence = marker
+        fence_length = count
+        output.push(line)
+        continue
+      }
+    }
+    // Conservatively preserve indented examples, including their link text.
+    if fence != "" || indent >= 4 || line.has_prefix("\t") {
       output.push(line)
       continue
     }
