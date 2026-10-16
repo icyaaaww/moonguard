@@ -1,55 +1,39 @@
 ## MoonGuard 项目申报书
 
+> 更新核对稿 · 2026-10-16 · 对应应用 1.1.0、核心库 0.1.1；供参赛者人工改写、核实后提交。
+
 **基本信息**
 
 - 项目名称：MoonGuard（月盾）：基于 MoonBit 的 AI 文件操作预演与恢复引擎
-- 参赛者：icyaaaww
-- 联系方式：13066083317
-- GitHub 仓库链接：[https://github.com/icyaaaww/moonguard](https://github.com/icyaaaww/moonguard)
+- 参赛者：icyaaaww；联系方式：13066083317
+- GitHub 仓库：[icyaaaww/moonguard](https://github.com/icyaaaww/moonguard)
 - 项目方向：MoonBit AI Agent 工具基础库 / 本地文件操作与恢复基础设施
-- 是否为移植项目：否
+- 是否为移植项目：否，原创实现；项目许可证：Apache License 2.0
+- 应用发行版：[v1.1.0](https://github.com/icyaaaww/moonguard/releases/tag/v1.1.0)；Mooncakes：[icyaaaww/moonguard@0.1.1](https://mooncakes.io/docs/icyaaaww/moonguard)
 
 **项目简介**
 
-MoonGuard（月盾）面向 AI Agent 操作本地文件时“修改前难以判断影响、执行中断后难以恢复、撤销可能覆盖人工改动”的问题，提供以 MoonBit 为核心的文件操作预演、执行校验与冲突感知恢复能力。项目将创建、写入、移动和回收等操作转化为结构化计划，执行前展示文件路径和内容差异，并重新检查工作区状态；修改前保存原始内容，恢复前检测后续人工修改，遇到冲突时停止覆盖。
+AI 批量整理知识库时，用户难以提前看清改动，中断后难以判断完成状态，直接还原备份又可能覆盖后续人工修改。MoonGuard 将操作转为可检查的计划：先展示差异，执行前复核快照，写入前保存日志，恢复时遇到后续修改则停止覆盖。
 
-项目面向 MoonBit Agent 工具作者、开发者工具维护者，以及使用 AI 整理文档和项目资料的个人与团队，提供独立的 MoonBit 核心库、JSON 交互协议、本地文件执行适配器、CLI 和浏览器工作台。首个应用场景是 Markdown 知识库整理：按主题归档文档、调整受支持的相对链接，并直观展示预演、过期计划拦截和中断恢复过程。
-
-目前已提供 1.1 公开发行版，包括解压后启动入口、页面打开资料目录、可视化文件操作表单与用户手册，并提供 MCP stdio 适配器：外部客户端可以读取指定文件、提交计划和查询状态，用户在月盾页面检查后执行或拒绝。已通过官方 MCP SDK 客户端的真实跨进程集成测试。核心库已发布到 Mooncakes：`icyaaaww/moonguard@0.1.1`，并通过全新项目安装及 API 调用验证。内置归档规划器仍采用确定性规则；实际大模型会话和 OpenSeek 客户端实测属于后续建设范围。发布不等于已完成真实用户验证。
+可复用的 MoonBit 核心通过 `plan`、`check_apply`、`restore_plan` 完成净变更、路径约束和恢复决策；Node.js 宿主负责文件 I/O、日志和并发协调。浏览器与宿主共用 MoonBit 编译产物并比对计划。知识库整理是首个应用，核心也面向 Agent 文件工具、批量文档编辑器和开发者工具，将“执行前检查”和“恢复时保护人工修改”做成公共能力。
 
 **核心功能范围**
 
-- 提供 MoonBit 原生的工作区快照、操作、问题、净变更和计划数据模型，支持 JSON 序列化与反序列化；
-- 提供统一核心入口 `plan(...)`、`check_apply(...)`、`restore_plan(...)` 和示例规划器 `organize(...)`，将计划判断与宿主文件 I/O 分离；
-- 支持 `create`、`write`、`move`、`trash` 四类受限文本文件操作，拒绝非法路径、目标覆盖、重复路径及常见大小写和目录冲突；
-- 支持执行前预演，展示文件树变化、受影响路径和逐行内容对照；浏览器与本地执行器使用同一份 MoonBit 编译产物计算并比对计划；
-- 支持执行前快照复核与计划重算，拦截预演后文件变化、过期计划和被修改的计划内容；
-- 提供本地真实文件执行适配器，在修改前保存恢复日志，并通过临时文件写入、文件同步与重命名完成单文件内容替换；
-- 支持正常撤销和中断恢复，恢复前逐路径检测冲突，保护后续人工修改并保留无关新增文件；
-- 提供事务状态记录与 SHA-256 内容校验记录，便于检查执行结果和定位需要恢复的操作；
-- 提供 Markdown 知识库整理示例，支持按指定 category 归档根目录文档，并调整受支持的简单行内相对链接与片段标识；
-- 提供浏览器工作台、CLI、外部操作 JSON 导入与计划导出，以及模拟人工修改和执行中断的可重复演示；
-- 提供基于官方 SDK 的 MCP stdio 适配器与独立客户端示例，支持提案与页面联动、用户拒绝、计划状态查询，并保持执行前快照复核；
-- 提供面向文档和知识库维护者的四项引导试用任务，支持匿名编号、同意提示、计时、操作事件、评分和 JSON 导出；本地汇总排除演练记录，并区分自报完成和操作证据；
-- 已提供 35 项 MoonBit 测试，分别在 JS 与 Wasm GC 后端通过；另提供 26 项本地文件、HTTP、启动与试用记录测试，以及 3 项 MCP 跨进程集成测试；
-- 提供 README、可执行 MoonBit 示例、架构与边界说明、验证记录、演示脚本、试用包及 GitHub Actions 配置；Mooncakes 核心库已发布，目前真实参与者为 0，后续将采集实际使用反馈。
+- 提供快照、操作、问题、净变更和计划模型及 JSON 接口；支持创建、完整内容写入、移动和可恢复回收。
+- 重算计划并复核快照，拒绝过期、篡改、覆盖、越界、目录大小写歧义与 Windows 保留名；宿主拦截链接等不安全文件类型。
+- 保存原始内容、事务状态和 SHA-256 校验值，支持撤销与中断恢复，保留无关新增文件。1.1.0 新增恢复内容预演、取消及确认，确认时重新核对快照。
+- 提供浏览器操作表单与 CLI；新增只读 `check`、`restore-preview` 和 UTF-8 `--output`，拒绝覆盖已有导出文件或导出到工作区内。
+- 提供确定性 Markdown 归档示例：识别闭合且无重复分类的简化 frontmatter，支持 BOM/CRLF/简单引号，更新简单相对链接并保护代码示例。
+- 提供官方 SDK 的 MCP stdio 适配器，支持文件读取、提案及状态查询，由用户在本地页面审阅、执行或拒绝；MCP 不直接执行文件修改。
+
+**已交付与验证**
+
+- 已公开源码、README、许可证、API 示例、启动脚本、手册及 CI；v1.1.0 发布时累计 12 次提交。应用需 Node.js 22+；核心可用 `moon add icyaaaww/moonguard@0.1.1` 安装。
+- MoonBit JS / Wasm GC 各 42 项、宿主/CLI/HTTP 38 项、MCP 3 项、DOM 1 项测试通过；发布提交的 Linux、Windows CI 通过，应用独立解压后 38 项宿主测试通过。
+- 新项目从注册表安装后，两个目标各 7 项 API 测试通过，22 个文件与发布包校验一致；浏览器已完成隔离示例归档与恢复。证据见 `docs/mooncakes-release.md`。
 
 **移植或参考说明**
 
-- 原项目名称：不适用，本项目为原创实现，非现有项目的整体移植；
-- 原项目链接：不适用；
-- 原项目许可证：不适用；
-- 本项目许可证：Apache License 2.0；
-- 语言与标准库参考：[MoonBit 官方文档](https://docs.moonbitlang.com/en/latest/)及 [MoonBit Core](https://github.com/moonbitlang/core)；
-- MCP 适配器依赖：[@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk) 与 [Zod](https://github.com/colinhacks/zod)，采用其原有 MIT 许可证，版本和依赖关系通过独立 lockfile 固定；
-- 生态调研参考：[OpenSeek](https://github.com/moonbitlang/openseek) 的 Agent 工具场景，以及 [workflow](https://github.com/moonbitlang/workflow) 的流程记录与恢复方向。已核对 OpenSeek 标准 MCP 配置结构并提供示例，尚未完成 OpenSeek 客户端实测；不表示移植其实现。
+非现有项目的整体移植，无对应原项目及原项目许可证。语言与标准库参考 [MoonBit 官方文档](https://docs.moonbitlang.com/en/latest/)和 [MoonBit Core](https://github.com/moonbitlang/core)；MCP 适配器使用 [官方 TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) 与 [Zod](https://github.com/colinhacks/zod)，保留其 MIT 许可证，依赖由 lockfile 固定。[OpenSeek](https://github.com/moonbitlang/openseek) 和 [workflow](https://github.com/moonbitlang/workflow) 仅作为 Agent 场景和流程恢复方向的调研参考，未移植其实现。
 
-本项目采用以下设计与范围约束：
-
-- 使用 MoonBit 原生包结构、类型系统、JSON 能力和测试方式组织核心代码，将操作计划、路径策略、冲突判断和恢复决策做成可复用公共 API；
-- 以结构化操作 JSON 作为外部规划器接入边界，模型负责提出操作，核心库负责独立验证；当前不提供任意 shell 命令执行；
-- 通过 Node.js 实现本地文件 I/O、日志与 HTTP 宿主，通过浏览器实现交互展示，避免在不同宿主重复实现核心判断规则；
-- 首版聚焦单一协作式工作区中的 UTF-8 文本文件，覆盖 `.md`、`.txt`、`.json`、`.csv`，暂不扩展至云 API、远程服务或任意二进制文件；
-- Markdown 示例采用明确受限的规则和链接语法，不宣称完整实现 CommonMark、YAML 或 Obsidian 链接解析；
-- 文件恢复以路径与文本内容为主要保证范围，不宣称恢复所有文件元数据，也不宣称具备操作系统沙箱、跨文件原子事务或物理断电可靠性保证；
-- 后续优先完善外部 Agent 工具适配、复杂文档支持及真实使用案例，以可复现测试和用户反馈持续验证项目价值。
+当前限定单一协作式工作区的 `.md/.txt/.json/.csv` UTF-8 文本，最多 200 个文件、200 项操作；Markdown/YAML 为有限子集。恢复覆盖路径与内容，不保证全部元数据、跨文件原子性或断电可靠性。OpenSeek/大模型实测、macOS 和真人试用尚未完成，真实参与者为 0。下一阶段用已有四项任务验证文档维护者的操作理解、冲突处理与恢复体验，再据反馈完善适配。
