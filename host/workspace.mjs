@@ -174,6 +174,11 @@ export async function preview(root, operations = null, title = '导入的文件�
   return operations === null ? core('organize', { snapshot }) : core('plan', { snapshot, operations, title });
 }
 
+export async function checkPlan(root, plan) {
+  const issues = core('check', { plan, snapshot: await readWorkspace(root) });
+  return { ready: issues.length === 0, issues, changedPaths: plan.changes.length };
+}
+
 export async function apply(root, plan, options = {}) {
   return lock(root, async () => {
     await ensureNoPending(root);

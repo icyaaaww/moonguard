@@ -102,12 +102,16 @@ npm start -- --workspace /absolute/path/to/workspace
 
 ```sh
 node host/cli.mjs preview /path/to/workspace /path/to/operations.json
+node host/cli.mjs preview /path/to/workspace /path/to/operations.json --output /outside/preview.json
+node host/cli.mjs check /path/to/workspace /outside/preview.json
 node host/cli.mjs apply /path/to/workspace /path/to/preview.json
 node host/cli.mjs history /path/to/workspace
 node host/cli.mjs restore /path/to/workspace TRANSACTION-ID
 ```
 
-`preview` 将完整计划输出到 stdout；不提供 operations 文件时使用内置归档器。将输出保存为 UTF-8 JSON，放在被操作工作区**之外**，以免新增计划文件使快照失效。Windows PowerShell 5.1 的默认重定向编码不同，建议使用页面“导出计划 JSON”或显式 UTF-8 保存。
+`preview` 将完整计划输出到 stdout；不提供 operations 文件时使用内置归档器。主分支新增 `--output`：直接写入 UTF-8 文件，拒绝覆盖已有文件，也拒绝写入工作区内部（包括经目录链接间接指向工作区的路径）。输出目录需要已存在。输入 JSON 可带 UTF-8 BOM。
+
+`check` 只检查计划是否仍适用于当前文件，不写文件或日志；实际执行时仍会再次检查。退出码：0 成功，1 参数/读写错误，2 预演不合法或检查未通过。`check` 和 `--output` 尚不包含在旧版 v1.0.0 下载包中。没有 `--output` 时，务必把重定向输出放在工作区**之外**；Windows PowerShell 5.1 默认重定向编码不同，建议使用新参数或页面导出。
 
 ## MoonBit 开发
 
