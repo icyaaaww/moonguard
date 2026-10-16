@@ -2,11 +2,11 @@
 
 **先看见，再改变。** 将 AI 提议的文件操作变成可预演、可检查、可恢复的计划。
 
-MoonGuard 1.0 是面向文档与知识库用户公开发布的本地文件变更工具。你可以在页面打开资料目录，用表单安排移动、重命名、新建、修改和回收，检查预演后再执行，需要时从记录恢复。MoonBit 负责计划与冲突判断，同一份编译产物同时运行在浏览器和本地执行器中。也提供 CLI 和可选 MCP 适配器。
+MoonGuard 1.1 是面向文档与知识库用户公开发布的本地文件变更工具。你可以在页面打开资料目录，用表单安排移动、重命名、新建、修改和回收，检查预演后再执行，需要时从记录恢复。MoonBit 负责计划与冲突判断，同一份编译产物同时运行在浏览器和本地执行器中。也提供 CLI 和可选 MCP 适配器。
 
 **[下载正式版](https://github.com/icyaaaww/moonguard/releases/latest)** · [使用手册](docs/user-guide.zh-CN.md) · [报告问题](https://github.com/icyaaaww/moonguard/issues)
 
-主分支已加入文档分类修复、代码示例保护、跨平台路径检查、CLI 检查/导出和恢复前预演，详见 [1.0 发布后的改进](docs/changes-after-1.0.md)。这些改进尚未包含在旧版下载包和 Mooncakes 0.1.0 中。
+1.1.0 加入文档分类修复、代码示例保护、跨平台路径检查、CLI 检查/导出和恢复前预演，详见 [版本说明](docs/release-1.1.zh-CN.md) 与 [改进详情](docs/changes-after-1.0.md)。
 
 适用于小型 UTF-8 文本资料目录。公开发布不等于已经完成规模化用户验证；真实用户验证仍为 0 位，实际大模型/OpenSeek 会话尚未验证。支持边界和测试证据见下文。
 
@@ -14,7 +14,7 @@ MoonGuard 1.0 是面向文档与知识库用户公开发布的本地文件变更
 
 需要预先安装 Node.js 22 或以上，无需 MoonBit 编译器或模型密钥。
 
-1. 在 Releases 下载 `MoonGuard-1.0.0.zip`，完整解压到可写目录。
+1. 在 Releases 下载 `MoonGuard-1.1.0.zip`，完整解压到可写目录。
 2. Windows 双击 `Start-MoonGuard.cmd`；Linux/macOS 在终端运行 `sh start-moonguard.sh`。
 3. 启动器自动选择空闲端口并打开浏览器。点击“打开资料目录”，粘贴文件夹完整路径；点击“新建操作”开始使用。保持启动窗口运行，结束时按 Ctrl+C。
 
@@ -112,11 +112,11 @@ node host/cli.mjs restore-preview /path/to/workspace TRANSACTION-ID
 node host/cli.mjs restore /path/to/workspace TRANSACTION-ID
 ```
 
-`preview` 将完整计划输出到 stdout；不提供 operations 文件时使用内置归档器。主分支新增 `--output`：直接写入 UTF-8 文件，拒绝覆盖已有文件，也拒绝写入工作区内部（包括经目录链接间接指向工作区的路径）。输出目录需要已存在。输入 JSON 可带 UTF-8 BOM。
+`preview` 将完整计划输出到 stdout；不提供 operations 文件时使用内置归档器。使用 `--output`：直接写入 UTF-8 文件，拒绝覆盖已有文件，也拒绝写入工作区内部（包括经目录链接间接指向工作区的路径）。输出目录需要已存在。输入 JSON 可带 UTF-8 BOM。
 
-`check` 只检查计划是否仍适用于当前文件，不写文件或日志；实际执行时仍会再次检查。退出码：0 成功，1 参数/读写错误，2 预演不合法或检查未通过。`check` 和 `--output` 尚不包含在旧版 v1.0.0 下载包中。没有 `--output` 时，务必把重定向输出放在工作区**之外**；Windows PowerShell 5.1 默认重定向编码不同，建议使用新参数或页面导出。
+`check` 只检查计划是否仍适用于当前文件，不写文件或日志；实际执行时仍会再次检查。退出码：0 成功，1 参数/读写错误，2 预演不合法或检查未通过。`check` 和 `--output` 从 1.1.0 起提供。没有 `--output` 时，务必把重定向输出放在工作区**之外**；Windows PowerShell 5.1 默认重定向编码不同，建议使用新参数或页面导出。
 
-`restore-preview` 输出恢复计划和冲突，不执行恢复；有冲突返回退出码 2。`restore` 是明确的执行命令，执行时重新检查当前文件。主分支页面的“恢复”会先打开内容预演窗口，确认时绑定已查看的快照；文件变化后需重新预演。
+`restore-preview` 输出恢复计划和冲突，不执行恢复；有冲突返回退出码 2。`restore` 是明确的执行命令，执行时重新检查当前文件。1.1.0 页面的“恢复”会先打开内容预演窗口，确认时绑定已查看的快照；文件变化后需重新预演。
 
 ## MoonBit 开发
 
@@ -156,11 +156,11 @@ npm test
 - [本地验证记录](docs/validation.md)
 
 Apache-2.0 许可。项目仓库为 [icyaaaww/moonguard](https://github.com/icyaaaww/moonguard)，参赛者为 icyaaaww。
-Mooncakes 核心库已发布为 [`icyaaaww/moonguard@0.1.0`](https://mooncakes.io/docs/icyaaaww/moonguard)，可在其他 MoonBit 项目中安装：
+Mooncakes 核心库版本为 [`icyaaaww/moonguard@0.1.1`](https://mooncakes.io/docs/icyaaaww/moonguard)，可在其他 MoonBit 项目中安装：
 
 ```sh
 moon add icyaaaww/moonguard
 ```
 
 API 导入示例见 `README.mbt.md`，[发布与独立安装验证记录](docs/mooncakes-release.md)提供实际检查结果。
-库版本 `0.1.0` 与应用版本 `1.0.0` 独立编号；当前发布工具要求包版本为 `0.x.y`。真实用户验证仍待开展。
+库版本 `0.1.1` 与应用版本 `1.1.0` 独立编号；当前发布工具要求包版本为 `0.x.y`。真实用户验证仍待开展。

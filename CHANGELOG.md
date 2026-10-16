@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 / Mooncakes core 0.1.1 — 2026-10-16
+
+- Added recovery previews with per-file content inspection, cancellation, conflict reporting and confirmation bound to the reviewed snapshot.
+- Added CLI `check`, `restore-preview` and safe UTF-8 `preview --output`; reject malformed operation input and report meaningful exit codes.
+- Fixed document classification for unclosed/duplicate frontmatter, with BOM, CRLF and simple quoted-category support.
+- Preserve examples inside longer Markdown fences and indented code.
+- Reject inconsistent path-component casing, case-only replacement plans and Windows superscript device names before writing files.
+- Public MoonBit API and journal schema remain unchanged. Versioned installation and package checks are recorded in `docs/mooncakes-release.md`.
+
 ## Mooncakes core 0.1.0 — 2026-10-15
 
 - Published `icyaaaww/moonguard@0.1.0` under the author's registered namespace; application version remains 1.0.0.

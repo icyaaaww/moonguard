@@ -31,7 +31,7 @@ export function validateRecord(value) {
     for (const e of row.events) if (!['preview_ok','demo_edit_ok','apply_ok','apply_stale','apply_interrupted','restore_ok','demo_reset_ok'].includes(e.kind) || typeof e.demo !== 'boolean' || !Number.isFinite(e.offsetMs) || e.offsetMs < 0 || e.offsetMs > row.elapsedMs) bad('任务事件不合法');
   }
   // Return an allowlisted structure: exclude any unexpected free text/content.
-  return { schema: 1, product: 'moonguard', version: ['0.2.0','1.0.0'].includes(value.version) ? value.version : 'unknown', sessionId: value.sessionId, source: value.source,
+  return { schema: 1, product: 'moonguard', version: ['0.2.0','1.0.0','1.1.0'].includes(value.version) ? value.version : 'unknown', sessionId: value.sessionId, source: value.source,
     participantCode: value.participantCode, consent: true, started: value.started,
     tasks: value.tasks.map(r => ({ id:r.id,outcome:r.outcome,elapsedMs:r.elapsedMs,ease:r.ease,events:r.events.map(e => ({kind:e.kind,demo:e.demo,offsetMs:e.offsetMs})) })), feedback: [...value.feedback] };
 }

@@ -8,6 +8,6 @@ test('launcher rejects invalid arguments and preserves paths with spaces', () =>
   assert.deepEqual(parseArgs(['--workspace','D:/my notes','--port','0','--open']), {workspace:'D:/my notes',port:0,open:true});
 });
 test('entrypoint help and version work without opening a workspace', () => {
-  assert.equal(execFileSync(process.execPath, ['host/server.mjs','--version'], {encoding:'utf8'}).trim(), '1.0.0');
+  assert.equal(execFileSync(process.execPath, ['host/server.mjs','--version'], {encoding:'utf8'}).trim(), '1.1.0');
   assert.match(execFileSync(process.execPath, ['host/server.mjs','--help'], {encoding:'utf8'}), /--workspace/);
 });

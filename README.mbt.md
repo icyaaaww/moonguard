@@ -4,8 +4,8 @@ Preview, validate and recover bounded file-operation plans with a pure MoonBit c
 The core performs no I/O. Hosts supply accurate snapshots, check filesystem types,
 serialize writers, persist a journal before writing, and apply only validated changes.
 
-Core module: `icyaaaww/moonguard@0.1.0`. The local application remains version
-`1.0.0`; library and application versions are independent. The current publishing
+Core module: `icyaaaww/moonguard@0.1.1`. The local application remains version
+`1.1.0`; library and application versions are independent. The current publishing
 tool requires a `0.x.y` library version.
 
 ## Install

@@ -26,6 +26,7 @@ test('exports allowlist fields rather than retaining file contents or personal f
   assert.ok(!JSON.stringify(validateRecord(r)).includes('private'));
   r.version='0.2.0';assert.equal(validateRecord(r).version,'0.2.0');
   r.version='1.0.0';assert.equal(validateRecord(r).version,'1.0.0');
+  r.version='1.1.0';assert.equal(validateRecord(r).version,'1.1.0');
 });
 test('evidence must be in order and in the same demonstration workspace',()=>{
   const event=kind=>({kind,demo:true,offsetMs:0});

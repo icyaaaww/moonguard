@@ -33,14 +33,14 @@ export async function launch(args, makeServer) {
     if (Number(process.versions.node.split('.')[0]) < 22) throw new Error('请安装 Node.js 22 或以上版本');
     const options = parseArgs(args);
     if (options.help) {
-      console.log('MoonGuard 月盾 1.0.0\n用法：node host/server.mjs [--workspace <目录>] [--port <端口>] [--open]\n不指定目录时打开示例，可在页面中打开自己的资料目录。--port 0 自动选择空闲端口。\n保持终端运行；按 Ctrl+C 停止。');
+      console.log('MoonGuard 月盾 1.1.0\n用法：node host/server.mjs [--workspace <目录>] [--port <端口>] [--open]\n不指定目录时打开示例，可在页面中打开自己的资料目录。--port 0 自动选择空闲端口。\n保持终端运行；按 Ctrl+C 停止。');
       return;
     }
-    if (options.version) { console.log('1.0.0'); return; }
+    if (options.version) { console.log('1.1.0'); return; }
     const server = await makeServer(options);
     await new Promise((resolve, reject) => { server.once('error', reject); server.listen(options.port, '127.0.0.1', resolve); });
     const url = `http://127.0.0.1:${server.address().port}`;
-    console.log(`MoonGuard 1.0.0 ready at ${url}\n${options.workspace ? '本地资料目录已打开。' : '已打开示例；点击“打开资料目录”开始使用。'}\n保持此窗口运行。按 Ctrl+C 停止；恢复记录保留在原工作区。`);
+    console.log(`MoonGuard 1.1.0 ready at ${url}\n${options.workspace ? '本地资料目录已打开。' : '已打开示例；点击“打开资料目录”开始使用。'}\n保持此窗口运行。按 Ctrl+C 停止；恢复记录保留在原工作区。`);
     let stopping = false;
     const stop = () => {
       if (stopping) return;
