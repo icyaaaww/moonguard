@@ -204,16 +204,28 @@ export async function apply(root, plan, options = {}) {
   });
 }
 
-export async function restore(root, id) {
+async function restoration(root, journal) {
+  const entries = await history(root);
+  const pending = entries.find(entry => !['committed', 'undone'].includes(entry.state));
+  if (pending && pending.id !== journal.id) throw new GuardError('请先恢复未完成的事务', [], pending.id);
+  return core('restore', { plan: journal.plan, snapshot: await readWorkspace(root), recovery: journal.state !== 'committed' });
+}
+
+export async function previewRestore(root, id) {
+  const j = await load(root, id);
+  if (j.state === 'undone') return { id, state: j.state, alreadyRestored: true, plan: null };
+  return { id, state: j.state, alreadyRestored: false, plan: await restoration(root, j) };
+}
+
+export async function restore(root, id, { expectedPlan } = {}) {
   return lock(root, async () => {
     const j = await load(root, id);
     if (j.state === 'undone') return { id, state: 'undone', alreadyRestored: true };
-    const entries = await history(root);
-    const pending = entries.find(entry => !['committed', 'undone'].includes(entry.state));
-    if (pending && pending.id !== id) throw new GuardError('请先恢复未完成的事务', [], pending.id);
-    const recovery = j.state !== 'committed';
-    const plan = core('restore', { plan: j.plan, snapshot: await readWorkspace(root), recovery });
+    const plan = await restoration(root, j);
     if (plan.issues.length) throw new GuardError('恢复遇到冲突，未修改文件', plan.issues, id);
+    if (expectedPlan !== undefined && JSON.stringify(plan) !== JSON.stringify(expectedPlan)) {
+      throw new GuardError('恢复预演已过期，请重新检查', [{ code: 'restore_stale', path: '', message: '文件在恢复预演后发生变化' }], id);
+    }
     j.state = 'undoing'; j.updated = new Date().toISOString(); await save(root, j);
     try {
       await applyChanges(root, plan.changes);

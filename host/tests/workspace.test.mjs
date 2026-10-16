@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import { preview, apply, restore, history, readWorkspace, workspaceRoot } from '../workspace.mjs';
+import { preview, apply, restore, previewRestore, history, readWorkspace, workspaceRoot } from '../workspace.mjs';
 import { demoFiles } from '../demo.mjs';
 
 test('unencodable text is rejected without creating files', async t => {
@@ -160,4 +160,48 @@ test('portable directory casing is checked before any filesystem write', async t
   const result = await apply(root, valid);
   await restore(root, result.id);
   assert.deepEqual(await readWorkspace(root), before);
+});
+
+test('restore preview leaves files and journal untouched until explicit confirmation', async t => {
+  const root = await fixture(t);
+  const baseline = await readWorkspace(root);
+  const result = await apply(root, await preview(root));
+  const current = await readWorkspace(root);
+  const journal = path.join(root, '.moonguard', result.id + '.json');
+  const originalJournal = await fs.readFile(journal);
+  const review = await previewRestore(root, result.id);
+  assert.equal(review.plan.issues.length, 0);
+  assert.deepEqual(Object.fromEntries(review.plan.result.files.map(f => [f.path, f.content])), Object.fromEntries(baseline.files.map(f => [f.path, f.content])));
+  assert.deepEqual(await readWorkspace(root), current);
+  assert.deepEqual(await fs.readFile(journal), originalJournal);
+  await restore(root, result.id, { expectedPlan: review.plan });
+  assert.deepEqual(await readWorkspace(root), baseline);
+  assert.equal((await previewRestore(root, result.id)).alreadyRestored, true);
+});
+
+test('restore preview reports conflicts and confirmation rejects changed snapshots', async t => {
+  const root = await fixture(t);
+  const result = await apply(root, await preview(root));
+  const review = await previewRestore(root, result.id);
+  await fs.writeFile(path.join(root, 'new.txt'), 'unrelated addition');
+  const before = await readWorkspace(root);
+  await assert.rejects(restore(root, result.id, { expectedPlan: review.plan }), e => e.issues.some(i => i.code === 'restore_stale'));
+  assert.deepEqual(await readWorkspace(root), before);
+  await fs.appendFile(path.join(root, 'README.md'), '\nhuman edit');
+  const conflict = await previewRestore(root, result.id);
+  assert.ok(conflict.plan.issues.some(i => i.code === 'restore_conflict'));
+  assert.deepEqual(conflict.plan.changes, []);
+  assert.equal((await history(root))[0].state, 'committed');
+});
+
+test('interrupted transaction with no changed files can still be previewed and finalized', async t => {
+  const root = await fixture(t);
+  let id;
+  await assert.rejects(apply(root, await preview(root), { failAfter: 0 }), e => { id = e.transaction; return Boolean(id); });
+  const review = await previewRestore(root, id);
+  assert.equal(review.plan.issues.length, 0);
+  assert.equal(review.plan.changes.length, 0);
+  assert.equal(review.alreadyRestored, false);
+  await restore(root, id, { expectedPlan: review.plan });
+  assert.equal((await history(root))[0].state, 'undone');
 });

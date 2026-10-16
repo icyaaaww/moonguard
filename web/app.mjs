@@ -13,6 +13,7 @@ let imported = null;
 let lastIssues = [];
 let validationOk = false;
 let restored = false;
+let restoreReview = null;
 const study = initStudy();
 const composer = initComposer({ getFiles: () => session?.snapshot.files ?? [], submit: value => { imported = value; action(doPreview); } });
 let actionGeneration = 0;
@@ -179,13 +180,39 @@ async function doPreview() {
 }
 
 function doRestore(id) {
-  switchView('workspace');
   return action(async () => {
-    session = await api('restore', { id });
+    restoreReview = null; $('restore-confirm').disabled = true;
+    session = await api('restore-preview', { id });
+    const review = session.result;
+    restoreReview = review;
+    const issues = review.plan?.issues ?? [];
+    const changes = review.plan?.changes ?? [];
+    $('restore-summary').textContent = review.alreadyRestored ? '这次操作已恢复，无需重复执行。' : issues.length ? '存在冲突，不能恢复。请先检查并处理下列问题。' : changes.length ? `将恢复 ${changes.length} 个文件路径。展开每一项查看当前内容和恢复结果；确认之前不会修改文件。` : '文件已处于原始状态；确认后将完成事务恢复记录。';
+    $('restore-issues').innerHTML = issues.map(i => `<li>${escape(i.path || '工作区')} · ${escape(i.message)}</li>`).join('');
+    const content = value => value === null ? '<em>此位置没有文件</em>' : `<pre>${escape(value.slice(0, 8000))}</pre>${value.length > 8000 ? '<p>仅显示前 8000 个字符，请使用 CLI restore-preview 查看完整计划。</p>' : ''}`;
+    $('restore-changes').innerHTML = changes.map(c => `<details><summary>${escape(c.path)} · ${c.before === null ? '恢复文件' : c.after === null ? '移除本次新增文件' : '还原内容'}</summary><h3>当前内容</h3>${content(c.before)}<h3>恢复结果</h3>${content(c.after)}</details>`).join('');
+    $('restore-confirm').disabled = review.alreadyRestored || issues.length > 0;
+    $('restore-dialog').showModal();
+  });
+}
+
+$('restore-confirm').addEventListener('click', () => {
+  if (!restoreReview || busy) return;
+  const review = restoreReview;
+  $('restore-confirm').disabled = true;
+  action(async () => {
+    try {
+      session = await api('restore', { id: review.id, reviewId: review.reviewId });
+    } catch (e) {
+      $('restore-summary').textContent = e.message + '。请关闭此窗口并重新预演恢复。';
+      restoreReview = null;
+      throw e;
+    }
+    restoreReview = null; $('restore-dialog').close(); switchView('workspace');
     validationOk = false; lastIssues = []; restored = true; afterView = false; selected = 'README.md';
     message(session.result.alreadyRestored ? '这次操作已恢复，无需重复执行。' : `恢复完成，已校验 ${session.result.verifiedPaths} 个受影响文件路径。`);
   });
-}
+});
 
 $('preview').addEventListener('click', () => action(doPreview));
 $('organize').addEventListener('click', () => { imported = null; action(doPreview); });

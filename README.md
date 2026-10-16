@@ -6,6 +6,8 @@ MoonGuard 1.0 是面向文档与知识库用户公开发布的本地文件变更
 
 **[下载正式版](https://github.com/icyaaaww/moonguard/releases/latest)** · [使用手册](docs/user-guide.zh-CN.md) · [报告问题](https://github.com/icyaaaww/moonguard/issues)
 
+主分支已加入文档分类修复、代码示例保护、跨平台路径检查、CLI 检查/导出和恢复前预演，详见 [1.0 发布后的改进](docs/changes-after-1.0.md)。这些改进尚未包含在旧版下载包和 Mooncakes 0.1.0 中。
+
 适用于小型 UTF-8 文本资料目录。公开发布不等于已经完成规模化用户验证；真实用户验证仍为 0 位，实际大模型/OpenSeek 会话尚未验证。支持边界和测试证据见下文。
 
 ## 一分钟启动
@@ -106,12 +108,15 @@ node host/cli.mjs preview /path/to/workspace /path/to/operations.json --output /
 node host/cli.mjs check /path/to/workspace /outside/preview.json
 node host/cli.mjs apply /path/to/workspace /path/to/preview.json
 node host/cli.mjs history /path/to/workspace
+node host/cli.mjs restore-preview /path/to/workspace TRANSACTION-ID
 node host/cli.mjs restore /path/to/workspace TRANSACTION-ID
 ```
 
 `preview` 将完整计划输出到 stdout；不提供 operations 文件时使用内置归档器。主分支新增 `--output`：直接写入 UTF-8 文件，拒绝覆盖已有文件，也拒绝写入工作区内部（包括经目录链接间接指向工作区的路径）。输出目录需要已存在。输入 JSON 可带 UTF-8 BOM。
 
 `check` 只检查计划是否仍适用于当前文件，不写文件或日志；实际执行时仍会再次检查。退出码：0 成功，1 参数/读写错误，2 预演不合法或检查未通过。`check` 和 `--output` 尚不包含在旧版 v1.0.0 下载包中。没有 `--output` 时，务必把重定向输出放在工作区**之外**；Windows PowerShell 5.1 默认重定向编码不同，建议使用新参数或页面导出。
+
+`restore-preview` 输出恢复计划和冲突，不执行恢复；有冲突返回退出码 2。`restore` 是明确的执行命令，执行时重新检查当前文件。主分支页面的“恢复”会先打开内容预演窗口，确认时绑定已查看的快照；文件变化后需重新预演。
 
 ## MoonBit 开发
 

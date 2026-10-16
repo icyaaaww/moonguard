@@ -7,7 +7,8 @@ import { JSDOM } from 'jsdom';
 import { makeServer } from '../../host/server.mjs';
 
 test('workbench forms open a directory, preview four operations, apply and restore exact contents', async t => {
-  const parent = path.resolve(os.tmpdir());
+  const parent = path.resolve(process.env.MOONGUARD_TEST_ROOT ?? os.tmpdir());
+  await fs.mkdir(parent, { recursive: true });
   const root = await fs.mkdtemp(path.join(parent, 'moonguard-ui-'));
   const workspace = path.join(root, '我的资料');
   await fs.mkdir(workspace);
@@ -66,7 +67,27 @@ test('workbench forms open a directory, preview four operations, apply and resto
   assert.equal(await fs.readFile(path.join(workspace, 'b.txt'), 'utf8'), 'updated\n');
   assert.equal(await fs.readFile(path.join(workspace, 'new.md'), 'utf8'), '# New\n');
   await assert.rejects(fs.access(path.join(workspace, 'old.json')));
-  $('restore').click(); await wait(() => /恢复完成/.test($('message').textContent));
+  $('restore').click(); await wait(() => $('restore-dialog').open && !$('restore-confirm').disabled);
+  assert.match($('restore-changes').textContent, /原|original/);
+  assert.equal(await fs.readFile(path.join(workspace, 'b.txt'), 'utf8'), 'updated\n');
+  $('restore-dialog').querySelector('.close-dialog').click();
+  assert.equal($('restore-dialog').open, false);
+  assert.equal(await fs.readFile(path.join(workspace, 'b.txt'), 'utf8'), 'updated\n');
+  $('restore').click(); await wait(() => $('restore-dialog').open && !$('restore-confirm').disabled);
+  await fs.writeFile(path.join(workspace, 'b.txt'), 'human edit');
+  $('restore-confirm').click(); await wait(() => /重新预演/.test($('restore-summary').textContent));
+  assert.equal($('restore-confirm').disabled, true);
+  assert.equal(await fs.readFile(path.join(workspace, 'b.txt'), 'utf8'), 'human edit');
+  $('restore-dialog').querySelector('.close-dialog').click();
+  await wait(() => !$('restore').disabled);
+  $('restore').click(); await wait(() => $('restore-dialog').open);
+  assert.equal($('restore-confirm').disabled, true);
+  assert.match($('restore-issues').textContent, /b.txt/);
+  $('restore-dialog').querySelector('.close-dialog').click();
+  await fs.writeFile(path.join(workspace, 'b.txt'), 'updated\n');
+  await wait(() => !$('restore').disabled);
+  $('restore').click(); await wait(() => $('restore-dialog').open && !$('restore-confirm').disabled);
+  $('restore-confirm').click(); await wait(() => /恢复完成/.test($('message').textContent));
   for (const [name, content] of Object.entries(originals)) assert.equal(await fs.readFile(path.join(workspace, name), 'utf8'), content);
   await assert.rejects(fs.access(path.join(workspace, 'new.md')));
   assert.deepEqual(await fs.readFile(path.join(workspace, 'ignored.bin')), Buffer.from([0, 1, 2]));

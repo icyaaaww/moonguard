@@ -3,7 +3,7 @@ import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomBytes } from 'node:crypto';
-import { workspaceRoot, readWorkspace, preview, apply, restore, history, appendDemoEdit, GuardError } from './workspace.mjs';
+import { workspaceRoot, readWorkspace, preview, apply, restore, previewRestore, history, appendDemoEdit, GuardError } from './workspace.mjs';
 import { createDemo } from './demo.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -28,6 +28,7 @@ export async function makeServer({ workspace = null, demoRoot = path.join(projec
   let planSource = null;
   let busy = false;
   let revision = 0;
+  let restoreReview = null;
   const proposals = new Map();
   const propose = async (input, source) => {
     if ((await history(root)).some(h => !['committed', 'undone'].includes(h.state))) throw new GuardError('存在未完成事务，请先恢复');
@@ -84,8 +85,19 @@ export async function makeServer({ workspace = null, demoRoot = path.join(projec
           }
           Object.assign(proposals.get(planId), { state: 'committed', transaction: result.id });
           currentPlan = null; planId = null;
+        } else if (url.pathname === '/api/restore-preview') {
+          const preview = await previewRestore(root, input.id);
+          const reviewId = randomBytes(16).toString('hex');
+          restoreReview = { workspace: root, reviewId, ...preview };
+          result = { reviewId, ...preview };
         } else if (url.pathname === '/api/restore') {
-          result = await restore(root, input.id);
+          // Existing CLI/API consumers may still request immediate checked restore.
+          // The browser always binds confirmation to a specific reviewed snapshot.
+          if (input.reviewId !== undefined && (!restoreReview || input.reviewId !== restoreReview.reviewId || input.id !== restoreReview.id || root !== restoreReview.workspace)) {
+            throw new GuardError('恢复预演编号已过期，请重新检查');
+          }
+          result = await restore(root, input.id, input.reviewId === undefined ? {} : { expectedPlan: restoreReview.plan });
+          restoreReview = null;
           if (proposals.has(planId)) proposals.get(planId).state = 'superseded';
           currentPlan = null; planId = null;
           for (const proposal of proposals.values()) if (proposal.transaction === input.id) proposal.state = 'restored';

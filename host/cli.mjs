@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
-import { workspaceRoot, preview, checkPlan, apply, restore, history } from './workspace.mjs';
+import { workspaceRoot, preview, checkPlan, apply, restore, previewRestore, history } from './workspace.mjs';
 
 const help = `MoonGuard
   node host/cli.mjs preview <workspace> [operations.json] [--output preview.json]
   node host/cli.mjs check <workspace> <preview.json>
   node host/cli.mjs apply <workspace> <preview.json>
   node host/cli.mjs restore <workspace> <transaction-id>
+  node host/cli.mjs restore-preview <workspace> <transaction-id>
   node host/cli.mjs history <workspace>
 
 preview prints JSON or writes a new UTF-8 file outside the workspace.
@@ -36,7 +37,7 @@ try {
     console.log(help);
   } else {
     const [command, directory, ...rest] = args;
-    if (!['preview', 'check', 'apply', 'restore', 'history'].includes(command) || !directory) throw new Error(help);
+    if (!['preview', 'check', 'apply', 'restore', 'restore-preview', 'history'].includes(command) || !directory) throw new Error(help);
     let output = null;
     const flag = rest.indexOf('--output');
     if (flag !== -1) {
@@ -45,7 +46,7 @@ try {
     }
     if (rest.length > 1 || rest.some(arg => arg.startsWith('--')) || (command === 'history' && rest.length)) throw new Error('参数不合法；使用 --help 查看用法');
     const [argument] = rest;
-    if (['check', 'apply', 'restore'].includes(command) && !argument) throw new Error(`${command} 缺少计划文件或事务编号`);
+    if (['check', 'apply', 'restore', 'restore-preview'].includes(command) && !argument) throw new Error(`${command} 缺少计划文件或事务编号`);
     const root = await workspaceRoot(directory);
     let value;
     if (command === 'preview') {
@@ -59,6 +60,10 @@ try {
       value = await checkPlan(root, await readJson(argument));
       if (!value.ready) process.exitCode = 2;
     } else if (command === 'apply') value = await apply(root, await readJson(argument));
+    else if (command === 'restore-preview') {
+      value = await previewRestore(root, argument);
+      if (value.plan?.issues.length) process.exitCode = 2;
+    }
     else if (command === 'restore') value = await restore(root, argument);
     else value = await history(root);
     if (output) {

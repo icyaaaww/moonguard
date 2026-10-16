@@ -93,3 +93,18 @@ test('CLI invalid operation preview is inspectable and returns exit code 2', asy
   assert.ok(JSON.parse(result.stdout).issues.some(i => i.code === 'missing'));
   assert.deepEqual(await fs.readdir(root), ['a.md']);
 });
+
+test('CLI recovery preview shows changes and reports conflicts without restoring', async t => {
+  const { root, input, output } = await fixture(t);
+  await run('preview', root, input, '--output', output);
+  const applied = JSON.parse((await run('apply', root, output)).stdout);
+  const review = await run('restore-preview', root, applied.id);
+  assert.equal(review.code, 0);
+  assert.equal(JSON.parse(review.stdout).plan.result.files[0].content, 'original');
+  assert.equal(await fs.readFile(path.join(root, 'a.md'), 'utf8'), '更新😀');
+  await fs.writeFile(path.join(root, 'a.md'), 'human edit');
+  const conflict = await run('restore-preview', root, applied.id);
+  assert.equal(conflict.code, 2);
+  assert.ok(JSON.parse(conflict.stdout).plan.issues.some(i => i.code === 'restore_conflict'));
+  assert.equal(await fs.readFile(path.join(root, 'a.md'), 'utf8'), 'human edit');
+});

@@ -112,3 +112,33 @@ test('real workspace disallows demo edits, reset and fault injection', async t =
   assert.equal((await request('/api/apply', { planId: p.value.planId, failAfter: 2 })).status, 409);
   assert.equal((await request('/api/session')).value.snapshot.files.length, 0);
 });
+
+test('HTTP restore review checks identity, previews without writing, and confirms once', async t => {
+  const { request } = await fixture(t);
+  const p = await request('/api/preview', {});
+  const applied = await request('/api/apply', { planId: p.value.planId });
+  const id = applied.value.result.id;
+  const review = await request('/api/restore-preview', { id });
+  assert.equal(review.status, 200);
+  assert.deepEqual(review.value.snapshot, applied.value.snapshot);
+  assert.deepEqual(review.value.history, applied.value.history);
+  assert.equal(review.value.result.plan.issues.length, 0);
+  assert.equal((await request('/api/restore', { id, reviewId: 'wrong' })).status, 409);
+  const restored = await request('/api/restore', { id, reviewId: review.value.result.reviewId });
+  assert.equal(restored.status, 200);
+  assert.deepEqual(restored.value.snapshot, p.value.plan.baseline);
+  assert.equal((await request('/api/restore', { id, reviewId: review.value.result.reviewId })).status, 409);
+});
+
+test('HTTP restore confirmation refuses an intervening manual edit', async t => {
+  const { request } = await fixture(t);
+  const p = await request('/api/preview', {});
+  const applied = await request('/api/apply', { planId: p.value.planId });
+  const id = applied.value.result.id;
+  const review = await request('/api/restore-preview', { id });
+  const edited = await request('/api/demo-edit', {});
+  const rejected = await request('/api/restore', { id, reviewId: review.value.result.reviewId });
+  assert.equal(rejected.status, 409);
+  assert.ok(rejected.value.issues.some(i => i.code === 'restore_conflict'));
+  assert.deepEqual((await request('/api/session')).value.snapshot, edited.value.snapshot);
+});
