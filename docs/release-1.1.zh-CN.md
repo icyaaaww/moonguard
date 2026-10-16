@@ -18,7 +18,7 @@
 
 ## 验证与适用范围
 
-发布流程检查 MoonBit JS / Wasm GC、宿主、CLI、HTTP、MCP 和 DOM 界面集成，并验证独立压缩包与注册表安装。完整结果记录在 `docs/mooncakes-release.md`；Linux/Windows CI 可在发布标签对应的 GitHub Actions 中查看。
+MoonBit JS / Wasm GC 各 42 项、宿主/CLI/HTTP 38 项、MCP 3 项、DOM 集成 1 项通过。核心发布包独立解包测试通过；全新消费项目从 Mooncakes 安装 0.1.1 后，两个目标各 7 项 API 测试通过，22 个安装文件与发布包逐一校验一致。完整结果记录在 `docs/mooncakes-release.md`；Linux/Windows CI 可在发布标签对应的 GitHub Actions 中查看。
 
 已在内置浏览器的隔离示例中完成归档、展开恢复内容和确认恢复。macOS、实际大模型/OpenSeek 会话、规模化使用尚未验证；真实试用人数仍为 0。
 

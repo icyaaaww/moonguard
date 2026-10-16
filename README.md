@@ -156,7 +156,7 @@ npm test
 - [本地验证记录](docs/validation.md)
 
 Apache-2.0 许可。项目仓库为 [icyaaaww/moonguard](https://github.com/icyaaaww/moonguard)，参赛者为 icyaaaww。
-Mooncakes 核心库版本为 [`icyaaaww/moonguard@0.1.1`](https://mooncakes.io/docs/icyaaaww/moonguard)，可在其他 MoonBit 项目中安装：
+Mooncakes 核心库已发布为 [`icyaaaww/moonguard@0.1.1`](https://mooncakes.io/docs/icyaaaww/moonguard)，可在其他 MoonBit 项目中安装：
 
 ```sh
 moon add icyaaaww/moonguard
