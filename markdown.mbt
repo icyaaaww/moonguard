@@ -1,9 +1,16 @@
 ///|
 fn category(content : String) -> String? {
+  let content = if content.has_prefix("\u{FEFF}") {
+    content[1:].to_owned()
+  } else {
+    content
+  }
   if !content.has_prefix("---\n") && !content.has_prefix("---\r\n") {
     return None
   }
   let mut first = true
+  let mut found : String? = None
+  let mut seen = false
   for line in content.split("\n") {
     let line = line.to_owned().trim().to_owned()
     if first {
@@ -11,12 +18,26 @@ fn category(content : String) -> String? {
       continue
     }
     if line == "---" {
-      break
+      return found
     }
     if line.has_prefix("category:") {
-      let value = line[9:].to_owned().trim().to_owned()
+      // Ambiguous metadata must never decide where a user's file moves.
+      if seen {
+        return None
+      }
+      seen = true
+      let raw = line[9:].to_owned().trim().to_owned()
+      let value = if raw.length() >= 2 &&
+        (
+          (raw.has_prefix("\"") && raw.has_suffix("\"")) ||
+          (raw.has_prefix("'") && raw.has_suffix("'"))
+        ) {
+        raw[1:raw.length() - 1].to_owned()
+      } else {
+        raw
+      }
       if value == "engineering" || value == "product" || value == "research" {
-        return Some(value)
+        found = Some(value)
       }
     }
   }

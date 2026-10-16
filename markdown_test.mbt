@@ -71,3 +71,44 @@ test "organizer collision fails without modifying source" {
   assert_false(p.ready())
   assert_true(p.result == source)
 }
+
+///|
+test "unclosed duplicate and unsupported frontmatter never move files" {
+  for
+    content in [
+      "---\ncategory: engineering\nbody without closing marker", "---\ncategory: engineering\ncategory: product\n---",
+      "---\ncategory: other\n---\ncategory: engineering", "---\ncategory: engineering # comment\n---",
+      "body\n---\ncategory: engineering\n---",
+    ] {
+    let source : @moonguard.Snapshot = {
+      files: [{ path: "note.md", content, }],
+      folders: [],
+      blocked: [],
+    }
+    let p = @moonguard.organize(source)
+    assert_true(p.issues.is_empty())
+    assert_true(p.changes.is_empty())
+  }
+}
+
+///|
+test "closed quoted and BOM frontmatter is recognized without altering bytes" {
+  for
+    content in [
+      "\u{FEFF}---\r\ncategory: engineering\r\n---\r\n你好😀", "---\ncategory: 'engineering'\n---\nbody",
+      "---\ncategory: \"engineering\"\n---\nbody",
+    ] {
+    let source : @moonguard.Snapshot = {
+      files: [{ path: "Note.md", content, }],
+      folders: [],
+      blocked: [],
+    }
+    let p = @moonguard.organize(source)
+    assert_true(p.ready())
+    assert_eq(p.result.files[0].path, "docs/engineering/note.md")
+    assert_eq(p.result.files[0].content, content)
+    assert_true(
+      @moonguard.restore_plan(p, p.result).result.files == source.files,
+    )
+  }
+}
