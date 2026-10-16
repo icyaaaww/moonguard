@@ -147,3 +147,17 @@ test('all interruption positions of the sample transaction can be recovered', as
     assert.deepEqual(await readWorkspace(root), before, `failure position ${i}`);
   }
 });
+
+test('portable directory casing is checked before any filesystem write', async t => {
+  const root = await fixture(t, [{ path: 'Docs/a.md', content: 'keep' }]);
+  const before = await readWorkspace(root);
+  const plan = await preview(root, [{ kind: 'create', path: 'docs/b.md', content: 'new' }]);
+  assert.ok(plan.issues.some(i => i.code === 'case_collision'));
+  await assert.rejects(apply(root, plan));
+  assert.deepEqual(await readWorkspace(root), before);
+  assert.deepEqual(await history(root), []);
+  const valid = await preview(root, [{ kind: 'create', path: 'Docs/b.md', content: 'new' }]);
+  const result = await apply(root, valid);
+  await restore(root, result.id);
+  assert.deepEqual(await readWorkspace(root), before);
+});

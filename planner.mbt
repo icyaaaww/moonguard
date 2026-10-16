@@ -125,6 +125,9 @@ pub fn plan(
   }
   if issues.is_empty() {
     issues.append(validate_snapshot(candidate))
+    let paths = snapshot_paths(snapshot)
+    paths.append(snapshot_paths(candidate))
+    issues.append(path_case_issues(paths))
   }
   let baseline = copy_snapshot(snapshot)
   let result = if issues.is_empty() {

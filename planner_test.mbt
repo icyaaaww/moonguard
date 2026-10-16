@@ -299,3 +299,64 @@ test "duplicate input paths are rejected" {
   }
   assert_eq(@moonguard.validate_snapshot(source)[0].code, "collision")
 }
+
+///|
+test "portable paths reject Windows superscript device aliases" {
+  for name in ["COM¹.md", "LPT².txt", "notes/com³.csv", "LPT1.json"] {
+    assert_false(@moonguard.valid_path(name))
+  }
+  for name in ["COM10.md", "notes/phase².md", "compare.md"] {
+    assert_true(@moonguard.valid_path(name))
+  }
+}
+
+///|
+test "parent folder spelling is consistent across files folders and opaque entries" {
+  for
+    source in [
+      @moonguard.Snapshot::{
+        files: [
+          { path: "Docs/a.md", content: "a", },
+          { path: "docs/b.md", content: "b", },
+        ],
+        folders: [],
+        blocked: [],
+      },
+      {
+        files: [{ path: "docs/a.md", content: "a", }],
+        folders: ["Docs"],
+        blocked: [],
+      },
+      { files: [], folders: ["Docs", "docs/sub"], blocked: [], },
+      {
+        files: [{ path: "docs/a.md", content: "a", }],
+        folders: [],
+        blocked: ["Docs/image.png"],
+      },
+    ] {
+    assert_true(
+      @moonguard.validate_snapshot(source).any(i => i.code == "case_collision"),
+    )
+  }
+}
+
+///|
+test "plans reject implicit folder and case-only replacement conflicts" {
+  let p = @moonguard.plan(@moonguard.empty_snapshot(), [
+    { kind: "create", path: "Docs/a.md", content: Some("a"), to: None, },
+    { kind: "create", path: "docs/b.md", content: Some("b"), to: None, },
+  ])
+  assert_false(p.ready())
+  assert_true(p.changes.is_empty())
+  let replacement = @moonguard.plan(snapshot(), [
+    { kind: "trash", path: "a.md", content: None, to: None, },
+    { kind: "create", path: "A.md", content: Some("replacement"), to: None, },
+  ])
+  assert_true(replacement.issues.any(i => i.code == "case_collision"))
+  assert_true(replacement.result == snapshot())
+  let valid = @moonguard.plan(@moonguard.empty_snapshot(), [
+    { kind: "create", path: "Docs/a.md", content: Some("a"), to: None, },
+    { kind: "create", path: "Docs/b.md", content: Some("b"), to: None, },
+  ])
+  assert_true(valid.ready())
+}

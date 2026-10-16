@@ -43,7 +43,10 @@ pub fn valid_path(path : String) -> Bool {
       return false
     }
     if base.length() == 4 && (base.has_prefix("com") || base.has_prefix("lpt")) {
-      if base[3] >= '1' && base[3] <= '9' {
+      if (base[3] >= '1' && base[3] <= '9') ||
+        base[3] == '¹' ||
+        base[3] == '²' ||
+        base[3] == '³' {
         return false
       }
     }
@@ -127,6 +130,43 @@ fn path_collision(
 }
 
 ///|
+fn snapshot_paths(snapshot : Snapshot) -> Array[String] {
+  let paths = snapshot.files.map(file => file.path)
+  paths.append(snapshot.folders)
+  paths.append(snapshot.blocked)
+  paths
+}
+
+///|
+// Every component must have one spelling, even for implicitly created folders.
+// Compare baseline and result together to reject case-only replacement plans.
+fn path_case_issues(paths : Array[String]) -> Array[Issue] {
+  let seen : Map[String, String] = Map([])
+  let issues = []
+  for path in paths {
+    let components = parent_paths(path)
+    components.push(path)
+    for component in components {
+      let lower = component.to_lower()
+      match seen.get(lower) {
+        Some(original) =>
+          if original != component {
+            issues.push(
+              issue(
+                "case_collision",
+                component,
+                "路径大小写与已有路径不一致：" + original,
+              ),
+            )
+          }
+        None => seen[lower] = component
+      }
+    }
+  }
+  issues
+}
+
+///|
 /// Full snapshot validation is shared by all frontends.
 pub fn validate_snapshot(snapshot : Snapshot) -> Array[Issue] {
   let issues = []
@@ -201,5 +241,6 @@ pub fn validate_snapshot(snapshot : Snapshot) -> Array[Issue] {
       }
     }
   }
+  issues.append(path_case_issues(snapshot_paths(snapshot)))
   issues
 }
